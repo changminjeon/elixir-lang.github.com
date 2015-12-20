@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 1 Introduction - はじめに
+title: 1 Introduction - 환영
 guide: 1
 ---
 
@@ -8,47 +8,47 @@ guide: 1
 
   <div class="toc"></div>
 
-ようこそ！
+환영！
 
 Welcome!
 
-このチュートリアルであなたが Elixir を始められるようにしようと思います．この章では Elixir がインストールされていることの確認と，IEx と呼ばれる Elixir のインタラクティブシェルをうまく動かせることに焦点を当てています．
+이 튜토리얼에서 당신이 Elixir를 시작할 수 있도록하려고합니다. 이 장에서는 Elixir가 설치되어 있는지 확인과 IEx라는 Elixir 대화 형 쉘을 잘 움직일 수에 초점을 맞추고 있습니다.
 
 In this tutorial we are going to get you started with Elixir. This chapter will focus on ensuring Elixir is installed and that you can sucessfully run Elixir's Interactive Shell, called IEx.
 
-必要なのは:
+필요한 것은:
 
   * Erlang - Version 17.0 以降
   * Elixir - Version 1.0.0 以降
 
-です．
+입니다.
 
 Our requirements are:
 
   * Erlang - Version 17.0 onwards
   * Elixir - Version 1.0.0 onwards
 
-それでは進めていきましょう！
+그럼 진행합시다!.
 
 Let's get started!
 
-> もしこのチュートリアルやウェブサイトでエラーを見つけたら，[イシュートラッカーへバグを報告するか，プルリクエストを送ってください](https://github.com/elixir-lang/elixir-lang.github.com)．もし言語のバグではないかと思うのでしたら，[言語のイシュートラッカーへお知らせください](https://github.com/elixir-lang/elixir/issues)
+> 만약이 튜토리얼이나 웹 사이트에서 오류를 발견하면 [이슈 트래커에 버그를보고하거나 풀 리퀘스트를 보내주세요 (https://github.com/elixir-lang/elixir-lang.github.com) . 만약 언어의 버그가 아닌가 생각하신다면, 언어의 이슈 트래커에 알려 주시기 바랍니다 (https://github.com/elixir-lang/elixir/issues)
 
 > If you find any errors in the tutorial or on the website, [please report a bug or send a pull request to our issue tracker](https://github.com/elixir-lang/elixir-lang.github.com). If you suspect it is a language bug, [please let us know in the language issue tracker](https://github.com/elixir-lang/elixir/issues).
 
-## 1.1 Installation - インストール
+## 1.1 Installation - 설치
 
-もしまだ Elixir をインストールしていなければ，[インストール](/install.html)を実行してください．もしやったことがあれば，`elixir -v` とすると現在の Elixir のバージョンを知ることができます．
+만약 아직 Elixir를 설치하지 않았으면 설치 (/install.html)를 실행하십시오. 만약 해본 적이 있다면`elixir -v`하면 현재 Elixir 버전을 알 수 있습니다.
 
 If you still haven't installed Elixir, run to our [installation page](/install.html). Once you are done, you can run `elixir -v` to get the current Elixir version.
 
-## 1.2 Interactive mode - インタラクティブモード
+## 1.2 Interactive mode - 대화형 모드
 
-Elixir をインストールすると，`iex`，`elixir` そして `elixirc` の 3 つが実行できるようになります．もし Elixir をソースからコンパイルしたか，パッケージ版を使っているならば，それらのファイルを `bin` ディレクトリの中で見つけられます．
+Elixir를 설치하면`iex``elixir` 그리고`elixirc`의 세 가지 수행 할 수 있습니다. 만약 Elixir를 소스에서 컴파일했는지, 패키지 버전을 사용하고 있다면, 그 파일을`bin` 디렉토리에서 찾을 수 있습니다.
 
 When you install Elixir, you will have three new executables: `iex`, `elixir` and `elixirc`. If you compiled Elixir from source or are using a packaged version, you can find these inside the `bin` directory.
 
-それでは，`iex` (windows をお使いなら `iex.bat` です ) を起動してみましょう．iex は Intractive Elixir という意味です．インタラクティブモードでは，どんな Elixir の式でも打つことができ，その結果を得ることができます．いくつか基本的な式で準備運動してみましょう:
+그럼`iex` (windows를 사용한다면`iex.bat`입니다)를 시작하자. iex는 Intractive Elixir 의미합니다. 대화형 모드에서는 어떤 Elixir 표현식이든 입력가능하며 결과를 얻을 수 있습니다. 기본적인 표현식 몇개로 몸좀 풀어볼까요:
 
 For now, let's start by running `iex` (or `iex.bat` if you are on Windows) which stands for Interactive Elixir. In interactive mode, we can type any Elixir expression and get its result. Let's warm up with some basic expressions:
 
@@ -61,13 +61,13 @@ iex> "hello" <> " world"
 "hello world"
 ```
 
-やっていけそうですね！次の章では言語構造や基本的な型にもっと慣れるためにインタラクティブシェルをたくさん使います．
+자 이제 준비가 된거 같네요! 다음 장에서는 언어 구조와 기본적인 형태에 더 익숙해 질 수 있도록 대화 형 쉘을 많이 사용합니다.
 
 It seems we are ready to go! We will use the interactive shell quite a lot in the next chapters to get a bit more familiar with the language constructs and basic types, starting in the next chapter.
 
-## 1.3 Running scripts - スクリプトを動かす
+## 1.3 Running scripts - 스크립트 파일 실행
 
-言語の基本に慣れたあと，たぶんシンプルなプログラムを書いてみたくなるでしょう．ファイルに Elixir のコードを書いて `elixir` で実行することができます:
+언어의 기본에 익숙해 진 후 아마 간단한 프로그램을 쓰고 싶어 질 것입니다. 파일에 Elixir 코드를 쓰고`elixir`에서 수행 할 수 있습니다 :
 
 After getting familiar with the basics of the language you may want to try writing simple programs. This can be accomplished by putting Elixir code into a file and executing it with `elixir`:
 
@@ -81,6 +81,6 @@ Hello world
 from Elixir
 ```
 
-後ほど，どうやって Elixir のコードをコンパイルするか ([8 章](/getting_started/8.html)にて) そしてどうやって Mix ビルドツールを使うか ([Mix & OTP ガイド](/getting_started/mix_otp/1.html)にて) を学びます．今は[2 章](/getting_started/2.html)へ進みましょう．
+나중에 어떻게 Elixir 코드를 컴파일하거나 (8 장 (/getting_started/8.html)에서) 그리고 어떻게 Mix 빌드 도구를 사용하거나 (Mix & OTP 가이드 (/getting_started/mix_otp/1.html )에서)를 배웁니다. 지금은 [2 장] (/getting_started/2.html)로 가십시오.
 
 Later on we will learn how to compile Elixir code (in [Chapter 8](/getting_started/8.html)) and how to use the Mix build tool (in the [Mix & OTP guide](/getting_started/mix_otp/1.html)). For now, let's move on to [Chapter 2](/getting_started/2.html).
