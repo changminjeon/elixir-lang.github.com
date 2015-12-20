@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 1 Introduction - 환영
+title: 1 Introduction - 환영합니다.
 guide: 1
 ---
 
@@ -8,18 +8,18 @@ guide: 1
 
   <div class="toc"></div>
 
-환영！
+환영합니다！
 
 Welcome!
 
-이 튜토리얼에서 당신이 Elixir를 시작할 수 있도록하려고합니다. 이 장에서는 Elixir가 설치되어 있는지 확인과 IEx라는 Elixir 대화 형 쉘을 잘 움직일 수에 초점을 맞추고 있습니다.
+이 튜토리얼에서는 당신이 Elixir를 시작할 수 있도록하려고합니다. 이 장에서는 Elixir가 설치되어 있는지 확인과 IEx라는 Elixir 대화 형 쉘을 잘 움직일 수에 초점을 맞추고 있습니다.
 
 In this tutorial we are going to get you started with Elixir. This chapter will focus on ensuring Elixir is installed and that you can sucessfully run Elixir's Interactive Shell, called IEx.
 
 필요한 것은:
 
-  * Erlang - Version 17.0 以降
-  * Elixir - Version 1.0.0 以降
+  * Erlang - 17.0 이후 버전
+  * Elixir - 1.0.0 이후 버전
 
 입니다.
 
@@ -28,11 +28,11 @@ Our requirements are:
   * Erlang - Version 17.0 onwards
   * Elixir - Version 1.0.0 onwards
 
-그럼 진행합시다!.
+자, 그럼 진행해 봅시다.
 
 Let's get started!
 
-> 만약이 튜토리얼이나 웹 사이트에서 오류를 발견하면 [이슈 트래커에 버그를보고하거나 풀 리퀘스트를 보내주세요 (https://github.com/elixir-lang/elixir-lang.github.com) . 만약 언어의 버그가 아닌가 생각하신다면, 언어의 이슈 트래커에 알려 주시기 바랍니다 (https://github.com/elixir-lang/elixir/issues)
+> 만약이 튜토리얼이나 웹 사이트에서 오류를 발견하면 [이슈 트래커에 버그를보고하거나 Pull Request를 보내주세요 (https://github.com/elixir-lang/elixir-lang.github.com) . 만약 언어의 버그가 아닌가 생각하신다면, 언어의 이슈 트래커에 알려 주시기 바랍니다 (https://github.com/elixir-lang/elixir/issues)
 
 > If you find any errors in the tutorial or on the website, [please report a bug or send a pull request to our issue tracker](https://github.com/elixir-lang/elixir-lang.github.com). If you suspect it is a language bug, [please let us know in the language issue tracker](https://github.com/elixir-lang/elixir/issues).
 
