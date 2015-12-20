@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 2 基本的な型 - Basic types
+title: 2 기본 타입 - Basic types
 guide: 2
 ---
 
@@ -8,7 +8,7 @@ guide: 2
 
   <div class="toc"></div>
 
-この章ではElixirの基本的な型: integers, floats, booleans, atoms, strings, lists と tuples について学びます．いくつかの基本的な型は:
+이 장에서는 Elixir의 기본 타입 : integers, floats, booleans, atoms, strings, lists와 tuples에 대해 배웁니다. 몇 가지 기본적인 형태는 다음과 같습니다:
 
 In this chapter we will learn more about Elixir basic types: integers, floats, booleans, atoms, strings, lists and tuples. Some basic types are:
 
@@ -23,9 +23,9 @@ iex> [1, 2, 3]  # list
 iex> {1, 2, 3}  # tuple
 ```
 
-## 2.1 基本的な数値 - Basic arithmetic
+## 2.1 기본 연산 - Basic arithmetic
 
-`iex`を開いて以下の式を入力しましょう:
+`iex`를 열고 다음 식을 입력하세요 :
 
 Open up `iex`  and type the following expressions:
 
@@ -38,7 +38,7 @@ iex> 10 / 2
 5.0
 ```
 
-`10 / 2`が整数`5`ではなく浮動小数点`5.0`を返すことに注意してください．これは期待通りの動作です．エリクサーでは`/`演算子は常に浮動小数点を返します．もし整数の商や余りが必要なら関数`div`や`rem`を呼べばできます:
+`10 / 2`가 정수`5`가 아닌 부동 소수점`5.0`을 리턴하는 것에 주의하십시요. 이것은 의도된것입니다. Elixir에서는 `/`연산자는 항상 부동 소수점을 반환합니다. 만약 정수의 상과 나머지가 필요한 경우 함수`div`과`rem`를 호출하면 됩니다.:
 
 Notice that `10 / 2` returned a float `5.0` instead of an integer `5`. This is expected. In Elixir, the operator `/` always returns a float. If you want to do integer division or get the division remainder, you can invoke the `div` and `rem` functions:
 
@@ -51,11 +51,11 @@ iex> rem 10, 3
 1
 ```
 
-関数を呼び出すのに括弧は必須ではないことに注意してください．
+함수를 호출하기 위해 괄호가 필요 없다는점에 유의하십시요.
 
 Notice that parentheses are not required in order to invoke a function.
 
-Elixirは2進数，8進数，16進数の入力もできます:
+Elixir는 2 진수, 8 진수, 16 진수 입력을 위해 짧은식을 지원합니다. 
 
 Elixir also supports shortcut notations for entering binary, octal and hexadecimal numbers:
 
@@ -68,7 +68,7 @@ iex> 0x1F
 31
 ```
 
-浮動小数点は1つ以上の数字のあとに点が必要で，指数として`e`を使うこともできます:
+부동 소수점은 적어도 하나 이상의 숫자 뒤에 점이 필요하며 지수로 `e`를 사용할 수 있습니다 :
 
 Float numbers require a dot followed by at least one digit and also support `e` for the exponent number:
 
@@ -79,11 +79,11 @@ iex> 1.0e-10
 1.0e-10
 ```
 
-Elixirの浮動小数点は64ビットの倍精度です．
+Elixir 에서 부동소수점은 64비트 표시형입니다.
 
 Floats in Elixir are 64 bit double precision.
 
-与えられた浮動小数点に近い整数値を取得するのに関数`round`を，また，浮動小数点の整数部分を取得するのに関数`trunc`を呼び出すことができます．
+주어진 부동 소수점에 가까운 정수 값을 가져 오는 함수`round`를 또한 부동 소수점의 정수 부분을 얻을 수있는 함수`trunc`를 호출 할 수 있습니다.
 
 You can invoke the `round` function to get the closest integer to a given float, or the `trunc` function to get the integer part of a float.
 
@@ -94,9 +94,9 @@ iex> trunc 3.58
 3
 ```
 
-## 2.2 真理値 - Booleans
+## 2.2 불리언 - Booleans
 
-Elixirでは真理値として`true`と`false`を使えます:
+Elixir는 불리언으로`true`와`false`을 사용할 수 있습니다 :
 
 Elixir supports `true` and `false` as booleans:
 
@@ -107,11 +107,11 @@ iex> true == false
 false
 ```
 
-Elixirは変数の型を調べて真理値を返す関数群を提供しています．例えば，関数`is_boolean/1`では変数がbooleanかどうか調べることができます:
+Elixir는 변수의 형태를 조사하고 불리언 값을 반환하는 함수들을 제공하고 있습니다. 예를 들어, 함수 `is_boolean/1` 에서는 변수가 boolean 있는지 확인할 수 있습니다 :
 
 Elixir provides a bunch of predicate functions to check for a value type. For example, the `is_boolean/1` function can be used to check if a value is a boolean or not:
 
-> 注: Elixirの中の関数は名前と引数の数(つまり項数)で表されます．つまり`is_boolean/1`は`is_boolean`という名前で引数を1つ取る特定の関数を示します．`is_boolean/2`は同じ名前ですが項数が異なるため，別の(存在しない)関数を表します．
+> 참고 : Elixir 에서 함수들은 이름과 인자의 수(즉 항수)로 표시됩니다. 즉, `is_boolean/1`은 `is_boolean`라는 함수이름과 하나의 인수를 가지고 있음을 나타냅니다. `is_boolean/2`는 같은 이름이지만 항수가 다르기 때문에 다른 (존재하지 않는) 함수를 나타냅니다.
 
 > Note: Functions in Elixir are identified by name and by number of arguments (i.e. arity). Therefore, `is_boolean/1` identifies a function named `is_boolean` that takes 1 argument. `is_boolean/2` identifies a different (nonexistent) function with the same name but different arity.
 
@@ -122,7 +122,7 @@ iex> is_boolean(1)
 false
 ```
 
-もし引数が整数，浮動小数点あるいはそのどちらかであることを調べたいなら，それぞれ`is_integer/1`，`is_float/1`か`is_number/1`を使うことができます．
+만약 인수가 정수, 부동 소수점 또는 그 중 하나 인 것을 확인하고 싶다면, 각각 `is_integer/1`, `is_float/1` 또는 `is_number/1` 을 사용할 수 있습니다.
 
 You can also use `is_integer/1`, `is_float/1` or `is_number/1` to check, respectively, if an argument is an integer, a float or either.
 
