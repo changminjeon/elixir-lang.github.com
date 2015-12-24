@@ -38,7 +38,7 @@ Let's get started!
 
 ## 1.1 Installation - 설치
 
-만약 아직 Elixir를 설치하지 않았으면 설치 (/install.html)를 실행하십시오. 일단 설치가 되었다면 `elixir -v` 을 실행하여 현재 Elixir 버전을 알 수 있습니다.
+만약 아직 Elixir를 설치하지 않았으면 설치 [installation page](/install.html)를 하십시요. 일단 설치가 되었다면 `elixir -v` 을 실행하여 현재 Elixir 버전을 알 수 있습니다.
 
 If you still haven't installed Elixir, run to our [installation page](/install.html). Once you are done, you can run `elixir -v` to get the current Elixir version.
 
