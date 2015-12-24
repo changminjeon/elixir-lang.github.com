@@ -55,7 +55,7 @@ iex> rem 10, 3
 
 Notice that parentheses are not required in order to invoke a function.
 
-Elixir는 2 진수, 8 진수, 16 진수 입력을 위해 짧은표기법을 지원합니다. 
+Elixir는 2 진수, 8 진수, 16 진수 입력을 위해 짧은표기법을 지원합니다.
 
 Elixir also supports shortcut notations for entering binary, octal and hexadecimal numbers:
 
@@ -315,7 +315,7 @@ iex> length [1, 2, 3]
 3
 ```
 
-두 리스트는 `++/2` 와 `--/2` 연산자를 사용하여 연결하거나 뺄수 있습니다:
+두 리스트는 `++/2` 와 `--/2` 연산자를 사용하여 결합하거나 뺄 수 있습니다:
 
 Two lists can be concatenated and subtracted using the `++/2` and `--/2` operators:
 
