@@ -81,6 +81,6 @@ Hello world
 from Elixir
 ```
 
-나중에 어떻게 Elixir 코드를 컴파일하거나 ([8장](/getting_started/8.html)에서) 그리고 어떻게 Mix 빌드 도구를 사용하거나 ([Mix & OTP 가이드](/getting_started/mix_otp/1.html )에서)를 배웁니다. 지금은 [2장](/getting_started/2.html)로 가봅시다.
+나중에 어떻게 Elixir 코드를 컴파일하거나 ([8장](/getting_started/8.html)에서) 그리고 어떻게 Mix 빌드 도구를 사용하는지를 ([Mix & OTP 가이드](/getting_started/mix_otp/1.html )에서) 배웁니다. 지금은 [2장](/getting_started/2.html)로 가봅시다.
 
 Later on we will learn how to compile Elixir code (in [Chapter 8](/getting_started/8.html)) and how to use the Mix build tool (in the [Mix & OTP guide](/getting_started/mix_otp/1.html)). For now, let's move on to [Chapter 2](/getting_started/2.html).
