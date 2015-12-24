@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 3 基本的な演算子 - Basic operators
+title: 3 기본 연산자 - Basic operators
 guide: 3
 ---
 
@@ -8,11 +8,11 @@ guide: 3
 
   <div class="toc"></div>
 
-前の章で，Elixirで算術演算子として`+`，`-`，`*`，`/`を使えるのを見ました．整数の商と余りを求めるのに`div/2`と`rem/2`があることも知りました．
+앞 장에서 Elixir 산술 연산자로 `+`, `-`, `*`, `/` 를 사용할 것을 보았습니다. 정수의 몫과 나머지를 찾는데 `div/2` 와 `rem/2`가 있다는 것도 알게 되었습니다.
 
 In the previous chapter, we saw Elixir provides `+`, `-`, `*`, `/` as arithmetic operators, plus the functions `div/2` and `rem/2` for integer division and remainder.
 
-Elixirはリストを操作するのに`++`と`--`という演算子も提供しています:
+Elixir는 리스트를 조작 하기 위해 `++` 와 `--` 연산자를 제공 합니다:
 
 Elixir also provides `++` and `--` to manipulate lists:
 
@@ -23,7 +23,7 @@ iex> [1,2,3] -- [2]
 [1,3]
 ```
 
-文字列の結合は`<>`で行なえます:
+문자열의 결합은 `<>` 로 가능합니다:
 
 String concatenation is done with `<>`:
 
@@ -32,7 +32,7 @@ iex> "foo" <> "bar"
 "foobar"
 ```
 
-Elixirには3つの論理演算子`or`，`and`と`not`があります．これらの演算子は第一引数が真理値(`true`か`false`)であることを求めています:
+Elixir에는 세 가지 논리 연산자 `or`, `and` 와 `not`를 제공합니다. 이러한 연산자는 첫 번째 인수가 불리언 (`true` 또는 `false`)이여야 합니다.
 
 Elixir also provides three boolean operators: `or`, `and` and `not`. These operators are strict in the sense that they expect a boolean (`true` or `false`) as their first argument:
 
@@ -43,7 +43,7 @@ iex> false or is_atom(:example)
 true
 ```
 
-真理値でない場合は例外を発生させます:
+불리언 아닌 경우는 예외를 발생시킵니다:
 
 Providing a non-boolean will raise an exception:
 
@@ -52,7 +52,7 @@ iex> 1 and true
 ** (ArgumentError) argument error
 ```
 
-`or`と`and`は短絡演算子です．左側が条件を満たさなかった場合にのみ右側が実行されます:
+`or` 와 `and` 는 단락 연산자입니다. 왼쪽 조건이 만족하지 않은 경우에만 오른쪽이 실행됩니다:
 
 `or` and `and` are short-circuit operators. They only execute the right side if the left side is not enough to determine the result:
 
@@ -64,11 +64,11 @@ iex> true or error("This error will never be raised")
 true
 ```
 
-> メモ: Erlang開発者の方へ，Elixirの`and`と`or`は，Erlangの`andalso`と`orelse`とまったく同じです．
+> 참고 : Erlang 개발자 분들에게, Elixir의 `and` 와 `or` 는 Erlang의 `andalso` 와 `orelse` 동일합니다.
 
 > Note: If you are an Erlang developer, `and` and `or` in Elixir actually map to the `andalso` and `orelse` operators in Erlang.
 
-これらの論理演算子と違い`||`，`&&`と`!`はどんな型でも受けつけます．この場合`false`と`nil`以外はtrueとして評価されます:
+이러한 불리언 연산자와 달리 `||`, `&&` 와 `!`는 어떤 타입도 허용합니다. 이 경우 `false` 와 `nil` 이외는 true로 평가됩니다:
 
 Besides these boolean operators, Elixir also provides `||`, `&&` and `!` which accept arguments of any type. For these operators, all values except `false` and `nil` will evaluate to true:
 
@@ -94,11 +94,11 @@ iex> !nil
 true
 ```
 
-まとめると，真理値を期待している場合は`and`，`or`と`not`を使います．真理値でない引数がきてよい場合は`&&`，`||`や`!`を使います．
+정리하면, 불리언 값일때는 `and`, `or` 와 `not` 을 사용하고 만약 인수의 타입이 불리언이 아니라면 `&&`, `||` 와 `!` 를 사용하십시요.
 
 As a rule of thumb, use `and`, `or` and `not` when you are expecting booleans. If any of the arguments are non-boolean, use `&&`, `||` and `!`.
 
-Elixirは比較演算子として`==`，`!=`，`===`，`!==`，`<=`，`>=`，`<`と`>`を提供しています:
+Elixir는 비교 연산자로 `==`, `!=`, `===`, `!==`, `<=`, `>=`, `<` 와 `>`를 제공하고 있습니다:
 
 Elixir also provides `==`, `!=`, `===`, `!==`, `<=`, `>=`, `<` and `>` as comparison operators:
 
@@ -111,7 +111,7 @@ iex> 1 < 2
 true
 ```
 
-`==`と`===`の違いは後者の方が整数と浮動小数点数の比較に厳密である点です:
+`==` 와 `===`의 차이는 후자가 정수와 부동 소수점 비교에 엄격 하다는 점입니다:
 
 The difference between `==` and `===` is that the latter is more strict when comparing integers and floats:
 
@@ -122,7 +122,7 @@ iex> 1 === 1.0
 false
 ```
 
-Elixirでは異なる型を比較することもできます:
+Elixir는 다른 형태를 비교할 수 있습니다:
 
 In Elixir, we can compare two different data types:
 
@@ -131,16 +131,16 @@ iex> 1 < :atom
 true
 ```
 
-便利にするために異なる型を比較できるようになっています．こうすると並べ替えアルゴリズムで異なる型同士の順序付けについて心配する必要がありません．全体の並べ替え順序は以下のように定義されています:
+편리를 위해 다른 타입을 비교할 수 있습니다. 이렇게 하면 정렬 알고리즘에서 다른 타입끼리의 정렬에 대해 걱정할 필요가 없습니다. 전체 정렬 순서는 다음과 같이 정의되어 있습니다:
 
 The reason we can compare different data types is pragmatism. Sorting algorithms don't need to worry about different data types in order to sort. The overall sorting order is defined below:
 
     number < atom < reference < functions < port < pid < tuple < maps < list < bitstring
 
-正確にこの順番を覚えておく必要はありませんが，こういった順番があることを知っておくことは大事です．
+정확하게 순서를 기억할 필요는 없지만, 이러한 순서가 있음을 알아야 합니다.
 
 You don't actually need to memorize this ordering, but it is important just to know an order exists.
 
-導入としてはこのくらいにしておきます．次の章では基本的な関数，型の変換やちょっとしたフロー制御について話しましょう．
+도입은 이 정도로 해두겠습니다. 다음 장에서는 기본적인 함수, 타입 변환이나 간단한 흐름 제어에 대해 살펴볼 것입니다.
 
 Well, that is it for the introduction. In the next chapter, we are going to discuss some basic functions, data type conversions and a bit of control-flow.
