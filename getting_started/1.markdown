@@ -28,11 +28,11 @@ Our requirements are:
   * Erlang - Version 17.0 onwards
   * Elixir - Version 1.0.0 onwards
 
-자, 그럼 진행해 봅시다.
+자, 그럼 시작해 봅시다.
 
 Let's get started!
 
-> 만약이 튜토리얼이나 웹 사이트에서 오류를 발견하면 [이슈 트래커에 버그를보고하거나 Pull Request를 보내주세요 (https://github.com/elixir-lang/elixir-lang.github.com) . 만약 언어의 버그가 아닌가 생각하신다면, 언어의 이슈 트래커에 알려 주시기 바랍니다 (https://github.com/elixir-lang/elixir/issues)
+> 만약이 튜토리얼이나 웹 사이트에서 오류를 발견하면 [이슈 트래커에 버그를보고하거나 Pull Request를 보내주세요](https://github.com/elixir-lang/elixir-lang.github.com) . 만약 언어의 버그가 아닌가 생각하신다면, [언어의 이슈 트래커에 알려 주시기 바랍니다](https://github.com/elixir-lang/elixir/issues)
 
 > If you find any errors in the tutorial or on the website, [please report a bug or send a pull request to our issue tracker](https://github.com/elixir-lang/elixir-lang.github.com). If you suspect it is a language bug, [please let us know in the language issue tracker](https://github.com/elixir-lang/elixir/issues).
 
@@ -48,7 +48,7 @@ Elixir를 설치하면 `iex`, `elixir` 그리고 `elixirc` 세 가지를 실행�
 
 When you install Elixir, you will have three new executables: `iex`, `elixir` and `elixirc`. If you compiled Elixir from source or are using a packaged version, you can find these inside the `bin` directory.
 
-그럼 `iex` (windows를 사용한다면`iex.bat`입니다)를 동작시켜 봅시다. iex는 Intractive Elixir 의미합니다. 대화형 모드에서는 어떤 Elixir 표현식이든 입력가능하며 결과를 얻을 수 있습니다. 기본적인 표현식 몇개로 몸좀 풀어볼까요:
+그럼 `iex` (windows를 사용한다면 `iex.bat` 입니다)를 동작시켜 봅시다. iex는 Intractive Elixir 의미합니다. 대화형 모드에서는 어떤 Elixir 표현식이든 입력가능하며 결과를 얻을 수 있습니다. 기본적인 표현식 몇개로 몸좀 풀어볼까요:
 
 For now, let's start by running `iex` (or `iex.bat` if you are on Windows) which stands for Interactive Elixir. In interactive mode, we can type any Elixir expression and get its result. Let's warm up with some basic expressions:
 
