@@ -149,7 +149,7 @@ The Erlang VM only allows a limited set of expressions in guards:
     * `trunc(number)`
     * `tuple_size(tuple)`
 
-guards 중 발생하는 에러들은 단순히 guard의 실패로 간주되며 guard 밖에 영향을 주지 않습니다:
+guards 에서 발생하는 에러들은 단순히 guard의 실패로 간주되며 guard 밖에 영향을 주지 않습니다:
 
 Keep in mind errors in guards do not leak but simply make the guard fail:
 
@@ -265,7 +265,7 @@ nil
 
 If the condition given to `if/2` returns `false` or `nil`, the body given between `do/end` is not executed and it simply returns `nil`. The opposite happens with `unless/2`.
 
-これらでは`else`ブロックも使えます:
+else 블록도 사용할 수 있습니다:
 
 They also support `else` blocks:
 
@@ -278,13 +278,13 @@ iex> if nil do
 "This will"
 ```
 
-> メモ: この言語で`if/2`や`unless/2`がマクロとして実装されているのがおもしろい点です;これらは他の様々な言語でそうであるような特別な言語構造ではありません．[モジュール`Kernel`のドキュメント](/docs/stable/elixir/Kernel.html)で`if/2`のドキュメントやソースを調べることができます．モジュール`Kernel`には他にも演算子`+/2`や関数`is_function/2`といったような，あなたがコードを書くときにデフォルトで自動importされて使えるようになっているものが定義されています．
+> 참고 : 언어에서 `if/2` 와 `unless/2` 가 매크로로 구현되는 것이 재미있는 점입니다; 이들은 다른 다양한 언어들이 그렇듯이 특별한 언어 구조가 없습니다. [Kernel 모듈 문서](/docs/stable/elixir/Kernel.html)에서 `if/2` 의 문서와 소스를 확인할 수 있습니다. 모듈 `Kernel` 에는 연산자 `+/2` 와 함수 `is_function/2` 와 같이 코드를 작성할 때 기본적으로 자동 import되어 사용할 수 있는것들이 정의되어 있습니다.
 
 > Note: An interesting note regarding `if/2` and `unless/2` is that they are implemented as macros in the language; they aren't special language constructs as they would be in many languages. You can check the documentation and the source of `if/2` in [the `Kernel` module docs](/docs/stable/elixir/Kernel.html). The `Kernel` module is also where operators like `+/2` and functions like `is_function/2` are defined, all automatically imported and available in your code by default.
 
-## 5.5 `do`ブロック - `do` blocks
+## 5.5 `do` 블록 - `do` blocks
 
-ここまでで，私たちは4つの制御構造`case`，`cond`，`if`そして`unless`を学びました，そしてこれらは全て`do`/`end`ブロックで囲まれていました．実は`if`を以下のようにも書けます:
+지금까지 우리는 4 개의 제어 구조 `case` , `cond` , `if` 그리고 `unless` 를 배웠습니다: 그리고 이것들은 모두 `do`/`end` 블록에 둘러싸여 있었습니다. 사실 `if` 를 다음과 같이 쓸 수도 있습니다:
 
 At this point, we have learned four control structures: `case`, `cond`, `if` and `unless`, and they were all wrapped in `do`/`end` blocks. It happens we could also write `if` as follows:
 
@@ -293,7 +293,7 @@ iex> if true, do: 1 + 2
 3
 ```
 
-Elixirでは，`do`/`end`ブロックは式のまとまりを簡単に`do:`へ渡すためのものです．これらは同じことを表しています:
+Elixir에서 `do`/`end` 블록은 표현식들을 쉽게 `do:`에 전달하기 위한 것입니다. 이것들은 동일합니다:
 
 In Elixir, `do`/`end` blocks are a convenience for passing a group of expressions to `do:`. These are equivalent:
 
@@ -310,7 +310,7 @@ iex> if true, do: (
 13
 ```
 
-2番目の構文は**キーワードリスト**を使っていると言っています．`else`も同じ構文で渡せます:
+두 번째 구문은 **키워드 리스트**를 사용하고 있다고 말합니다. `else` 같은 구문으로 넘길 수 있습니다:
 
 We say the second syntax is using **keyword lists**. We can pass `else` using this syntax:
 
@@ -319,7 +319,7 @@ iex> if false, do: :this, else: :that
 :that
 ```
 
-`do`/`end`ブロックを使う際には一つ気をつけることがあります．ブロックは常に一番遠くの関数呼び出しに束縛されます．例えば，以下の式:
+`do`/`end` 블록을 사용시에는 한가지 명심할 점이 있습니다. 블록은 항상 가장 바깥쪽 함수 호출에 바인딩 됩니다. 예를 들어, 아래식은:
 
 One thing to keep in mind when using `do`/`end` blocks is they are always bound to the outermost function call. For example, the following expression:
 
@@ -329,7 +329,7 @@ iex> is_number if true do
 ...> end
 ```
 
-はこのように解釈されます:
+이렇게 파싱됩니다:
 
 Would be parsed as:
 
@@ -339,7 +339,7 @@ iex> is_number(if true) do
 ...> end
 ```
 
-そうするとElixirは`is_number/2`を呼び出そうとして未定義関数エラーになります．あいまいさを解消するのには明示的に括弧を追加すると良いです:
+그러면 Elixir는 `is_number/2` 를 호출하려고 하고 정의되지 않은 함수 오류를 발생시킬것입니다. 모호성을 해소하려면 명시적으로 괄호를 추가하면 좋습니다:
 
 Which leads to an undefined function error as Elixir attempts to invoke `is_number/2`. Adding explicit parentheses is enough to resolve the ambiguity:
 
@@ -350,6 +350,6 @@ iex> is_number(if true do
 true
 ```
 
-キーワードリストはこの言語においてとても重要な役割を担っており，様々な関数やマクロにおいてあたりまえの存在です．後の章でこのことをもう少し詳しくみていきます．今は"バイナリ，文字列そして文字リスト"について話していきましょう．
+키워드 리스트는 언어에서 매우 중요한 역할을 담당하고 있으며, 다양한 함수와 매크로에서 당연한 존재입니다. 이후 장에서는 이 점을 좀 더 자세히 살펴 볼것입니다. 지금은 "바이너리, 문자열 그리고 문자 리스트"에 대해 이야기하겠습니다.
 
 Keyword lists play an important role in the language and are quite common in many functions and macros. We will explore them a bit more in a future chapter. Now it is time to talk about "Binaries, strings and char lists".
