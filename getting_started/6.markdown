@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 6 バイナリ，文字列そして文字リスト - Binaries, strings and char lists
+title: 6 바이너리, 문자열, 문자 리스트 - Binaries, strings and char lists
 guide: 6
 ---
 
