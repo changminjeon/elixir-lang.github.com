@@ -350,6 +350,6 @@ iex> is_number(if true do
 true
 ```
 
-키워드 리스트는 언어에서 매우 중요한 역할을 담당하고 있으며, 다양한 함수와 매크로에서 당연한 존재입니다. 이후 장에서는 이 점을 좀 더 자세히 살펴 볼것입니다. 지금은 "바이너리, 문자열 그리고 문자 리스트"에 대해 이야기하겠습니다.
+키워드 리스트는 언어에서 매우 중요한 역할을 담당하고 있으며, 다양한 함수와 매크로에서 아주 흔합니다. 이후 장에서는 이 점을 좀 더 자세히 살펴 볼것입니다. 지금은 "바이너리, 문자열 그리고 문자 리스트"에 대해 이야기하겠습니다.
 
 Keyword lists play an important role in the language and are quite common in many functions and macros. We will explore them a bit more in a future chapter. Now it is time to talk about "Binaries, strings and char lists".
