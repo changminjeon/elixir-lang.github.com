@@ -135,7 +135,7 @@ iex> <<256 :: utf8, 0>>
 <<196, 128, 0>>
 ```
 
-만약 한 바이트가 8 비트일때, 1 비트 사이즈를 사용하라는 수식어를 넘기면 어떻게 될까요?
+만약 한 바이트가 8 비트일때, 1 비트만 사용하라는 수식어를 넘기면 어떻게 될까요?
 
 If a byte has 8 bits, what happens if we pass a size of 1 bit?
 
@@ -152,11 +152,11 @@ iex> bit_size(<< 1 :: size(1)>>)
 1
 ```
 
-値はもはやバイナリではありませんがビット列ではあります -- 単なるビットの集まり！つまりバイナリとは8で割り切れる数のビット列のことです！
+더 이상 바이너리 값이 아니고 비트스트링 값입니다 -- 단순한 비트들의의 모임! 즉 바이너리는 8개의 비트스트링으로 구성됩니다.
 
 The value is no longer a binary, but a bitstring -- just a bunch of bits! So a binary is a bitstring where the number of bits is divisible by 8!
 
-バイナリ/ビット列にもパターンマッチできます:
+바이너리와 비트스트링에도 패턴매칭이 됩니다.
 
 We can also pattern match on binaries / bitstrings:
 
@@ -169,7 +169,7 @@ iex> <<0, 1, x>> = <<0, 1, 2, 3>>
 ** (MatchError) no match of right hand side value: <<0, 1, 2, 3>>
 ```
 
-バイナリの全てのエントリーはちょうど8bitずつを期待していることに注意してください．しかしバイナリ修飾子を使うことで「残り」へマッチさせることができます:
+바이너리안에 있는 각각의 값들은 정확히 8비트에 일치해야 하지만 binary 수식어를 통해 나머지 값들을 매칭 시킬수 있습니다.
 
 Note each entry in the binary is expected to match exactly 8 bits. However, we can match on the rest of the binary modifier:
 
@@ -180,7 +180,7 @@ iex> x
 <<2, 3>>
 ```
 
-上のパターンは`<<>>`の最後がバイナリであるときにだけ動作します．文字列結合演算子`<>`の結果に似ていますね:
+위 패턴은 바이너리가 `<<>>` 의 끝에 있어야 동작합니다. 문자열 결합 연산자 `<>` 로도 유사한 결과를 얻을 수 있습니다.
 
 The pattern above only works if the binary is at the end of `<<>>`. Similar results can be achieved with the string concatenation operator `<>`:
 
@@ -191,13 +191,13 @@ iex> rest
 "llo"
 ```
 
-ビット列，バイナリや文字列をめぐる旅も終わりです．文字列はUTF-8でエンコードされたバイナリのことで，バイナリは8で割り切れる数のビット列の集まりです．ここではElixirがビットとバイトを柔軟に扱える機能を提供していることをお見せしましたが，実際にはバイナリで作業する時間のうち99%はそのままバイナリとして扱い，`is_binary/1`と`byte_size/1`の関数を使うことになるでしょう.
+비트스트링, 바이너리와 문자열 여행도 이제 끝입니다. 문자열은 UTF-8로 인코딩된 바이너리이며 바이너리는 8개의 비트수를 가집니다. 여기에서는 비트와 바이트를 유연하게 처리 할 수있는 기능을 Elixir가 제공하는걸 봤지만 실제로는 바이너리를 다룰때 99%의 시간은 `is_binary/1` 과 `byte_size/1` 함수를 사용하게 될 것입니다.
 
 This finishes our tour of bitstrings, binaries and strings. A string is a UTF-8 encoded binary, and a binary is a bitstring where the number of bits is divisible by 8. Although this shows the flexibility Elixir provides to work with bits and bytes, 99% of the time you will be working with binaries and using the `is_binary/1` and `byte_size/1` functions.
 
-## 6.3 文字リスト - Char lists
+## 6.3 문자 리스트 - Char lists
 
-文字リストは文字のリストでしかありません:
+문자 리스트는 말 그대로 문자의 리스트이지 그 이상 그 이하도 아닙니다:
 
 A char list is nothing more than a list of characters:
 
@@ -210,11 +210,11 @@ iex> 'hello'
 'hello'
 ```
 
-ご覧のとおり，単一引用符で囲まれた文字列はバイト列のかわりにコードポイントのリストを含んでいます(iexではASCIIの範囲より外にある文字を含んでいると，コードポイントの数字しか表示しないことに注意してください)．二重引用符で囲まれたものは文字列(つまりバイナリ)で，単一引用符で囲まれたものは文字のリスト(つまりリスト)です．
+보시다시피 작은따옴표로 둘러싸인 문자리스트는 바이트 값 대신에 각 문자의 코드포인트 값을 포함합니다 (iex에서는 ASCII 범위보다 밖에있는 문자를 포함하면 코드 포인트의 값으로 표시된다는점에 주의하십시요). 큰따옴표로 묶인것은 문자열 (즉 바이너리)인 반면에 작은따옴표로 묶인 것은 문자의 리스트 입니다.
 
 You can see that, instead of containing bytes, a char list contains the code points of the characters between single-quotes (note that iex will only output code points if any of the chars is outside the ASCII range). So while double-quotes represent a string (i.e. a binary), single-quotes represents a char list (i.e. a list).
 
-実際には文字リストはほとんどErlangとのインターフェース，特にバイナリを引数に取れない古いライブラリに使われています．`to_string/1`や`to_char_list/1`関数を使うと文字リストを文字列に変換したりその逆のことができます:
+실제로 문자리스트는 Erlang과의 인터페이싱할때 대부분 사용됩니다. 특히, 바이너리를 인자로 허용하지 않는 오래된 라이브러리에 사용되고 있습니다. `to_string/1` 와 `to_char_list/1` 함수를 사용하면 문자리스트를 문자열로 변환하거나 그 반대로 할 수 있습니다:
 
 In practice, char lists are used mostly when interfacing with Erlang, in particular old libraries that do not accept binaries as arguments. You can convert a char list to a string and back by using the `to_string/1` and `to_char_list/1` functions:
 
@@ -229,10 +229,10 @@ iex> to_string 1
 "1"
 ```
 
-それらの関数はポリモーフィックであることに注目してください．文字リストを文字列の変換だけではなく，整数から文字列，アトムから文字列などの変換にも使えます．
+위 함수들은 다형성 함수입니다. 문자리스트를 문자열로 변환할 뿐만 아니라 정수에서 문자열, 원자형에서 문자열등의 변환에 사용할 수 있습니다.
 
 Note that those functions are polymorphic. They not only convert char lists to strings, but also integers to strings, atoms to strings, and so on.
 
-バイナリ，文字列そして文字リストの話題から離れて，キーバリューデータ構造について話していくことにしましょう．
+바이너리, 문자열, 그리고 문자리스트는 여기까지입니다. 이제 키-값 데이터 구조에 대해 살펴봅시다.
 
 With binaries, strings, and char lists out of the way, it is time to talk about key-value data structures.
