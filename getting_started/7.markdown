@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 7 キーワード，マップそしてリスト - Keywords, maps and dicts
+title: 7 키워드, 맵과 딕셔너리 - Keywords, maps and dicts
 guide: 7
 ---
 
