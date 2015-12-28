@@ -14,7 +14,7 @@ In this chapter, we will learn about the `case`, `cond` and `if` control-flow st
 
 ## 5.1 case - case
 
-case 는 어느 하나에 매칭 할 때까지 여러 패턴과 비교해 줍니다:
+case 는 어느 한곳에 매칭 될 때까지 여러 패턴과 비교해 줍니다:
 
 `case` allows us to compare a value against many patterns until we find a matching one:
 
