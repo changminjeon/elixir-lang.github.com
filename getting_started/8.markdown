@@ -278,8 +278,6 @@ end
 
 위의 코드를 "concat.ex"라는 파일명으로 저장하고 컴파일하면 Elixir는 다음과 같은 경고를 출력 할 것입니다:
 
-    concat.ex:7: this clause cannot match because a previous clause at line 2 always matches
-
 If we save the code above in a file named "concat.ex" and compile it, Elixir will emit the following warning:
 
     concat.ex:7: this clause cannot match because a previous clause at line 2 always matches
