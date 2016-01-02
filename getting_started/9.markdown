@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 9 再帰 - Recursion
+title: 9 재귀 - Recursion
 guide: 9
 ---
 
