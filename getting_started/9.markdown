@@ -18,8 +18,7 @@ for(i = 0; i < array.length; i++) {
 }
 ```
 
-上の例では配列と補助変数`i`を変化させています．Elixirではこうできません．そのかわり関数型言語は再帰に頼ります: 関数は再帰的に呼び出され，停止の条件になるまで，動作し続けます．任意の回数文字を出力する以下の例を考えてみましょう:
-
+위의 예제는 배열과 보조 변수 `i` 를 변화시키고 있습니다. Elixir에서는 저렇게 할 수 없습니다. 대신 함수형 언어는 재귀에 의존합니다: 함수는 재귀적으로 호출되어 정지 조건이 될 때까지 계속 작동합니다. 임의의 횟수만큼 문자를 출력하는 다음예를 살펴 봅시다:
 
 In the example above, we are mutating the array and the helper variable `i`. That's not possible in Elixir. Instead, functional languages rely on recursion: a function is called recursively until a condition is reached that stops the recursive action from continuing. Consider the example below that prints a string an arbitrary amount of times:
 
@@ -41,27 +40,27 @@ Recursion.print_multiple_times("Hello!", 3)
 # Hello!
 ```
 
-caseと似たように，関数は複数の句を持つことができます．関数へ渡した引数が句のパターンとマッチし，ガードが`true`と評価される，特定の1つの句が実行されます．
+case와 유사하게 함수는 여러 절을 가질 수 있습니다. 함수에 전달된 인자가 절의 인자패턴과 일치하고 가드(guard)가 `true` 로 평가(evaluates)되는 특정 1개의 절이 실행됩니다.
 
 Similar to case, a function may have many clauses. A particular clause is executed when the arguments passed to the function match the clause's argument patterns and its guard evaluates to `true`.
 
-上の`print_multiple_times/2`が最初に呼ばれたとき，引数`n`は`3`になっています．
+위 `print_multiple_times/2` 가 처음 호출 될 때 인자 `n` 은 `3` 이 되고 있습니다.
 
 Above when `print_multiple_times/2` is initially called, the argument `n` is equal to `3`.
 
-最初の句は`n`が`1`と同じか小さいときにこの定義を使ってくださいというガードを持っています．そうではないため，Elixirは次の句の定義へと移ります．
+첫 번째 절은 `n` 이 `1` 과 같거나 작을 때 사용할 수있는 가드(guard)를 가지고 있습니다. 때문에 Elixir는 다음 절 정의로 이동합니다.
 
 The first clause has a guard which says use this definition if and only if `n` is less than or equal to `1`. Since this is not the case, Elixir proceeds to the next clause's definition.
 
-2番目の定義はパターンにマッチし，ガードもありませんので，これが実行されます．最初に`msg`を表示し，次に2番目の引数へ`n-1`(`2`)を渡して自分自身を呼び出します．そうすると`msg`が表示され，再び`print_multiple_times/2`が呼び出されます．このとき2番目の引数は`1`になります．
+두 번째 정의는 패턴과 일치하고 가드(guard)도 없기 때문에 실행됩니다. 먼저 `msg` 를 출력한 다음 두 번째 인자로 `n - 1` (`2`)을 전달하여 호출합니다. 그러면 `msg` 가 출력되고 다시 `print_multiple_times/2`가 호출됩니다. 이 때 두 번째 인자는 `1` 이됩니다.
 
 The second definition matches the pattern and has no guard so it will be executed. It first prints our `msg` and then calls itself passing `n - 1` (`2`) as the second argument. Our `msg` is printed and `print_multiple_times/2` is called again this time with the second argument set to `1`.
 
-`n`が`1`になったことにより，`print_multiple_times/2`にある1番目の定義のガードが真と評価されるので，この定義を実行します．`msg`が表示され，あとは何もすることが残っていません．
+`n` 이 `1`이기 때문에, `print_multiple_times/2`의 첫 번째 정의의 가드(guard)가 참으로 평가되어 이를 실행합니다. `msg` 가 출력되고 더이상 실행할 것이 없게됩니다.
 
 Because `n` is now set to `1`, the guard to our first definition of `print_multiple_times/2` evaluates to true, and we execute this particular definition. The `msg` is printed, and there is nothing left to execute.
 
-引数の2番目へどんな数を渡されても，1番目の定義("ベースケース"と呼ばれています)，あるいはベースケースへ確実に1歩近づくような2番目の定義，のどちらかが呼ばれる`print_multiple_times/2`を定義しました．
+두 번째 인자로써 어떤 수가 전달되는지 상관없이 첫 번째 정의("베이스 케이스"라고 합니다)를 트리거(trigger) 하거나 베이스 케이스에 한번에 갈수있는 두번째 정의가 트리거(trigger) 되는 `print_multuple_times/2` 를 정의했습니다.(아 뭔가 대단히 어색함...)
 
 We defined `print_multiple_times/2` so that no matter what number is passed as the second argument it either triggers our first definition (known as a "base case") or it triggers our second definition which will ensure that we get exactly 1 step closer to our base case.
 
