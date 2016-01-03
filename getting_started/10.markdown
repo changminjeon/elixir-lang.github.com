@@ -11,7 +11,8 @@ guide: 10
 
 ## 10.1 enumerable - Enumerables
 
-Elixirはenumerable(列挙できる)という概念と，一緒に動かせる[`Enum`モジュール](/docs/stable/elixir/Enum.html)を用意しています．私たちは既に2つのenumerableを学びました: リストとマップです．
+Elixir는 열거형(enumerable)컨셉을 제공하고 이것을 [the `Enum` module](/docs/stable/elixir/Enum.html)모듈로 다룰수 있습니다.
+우리는 이미 2가지 열거형 리스트와 맵을 배웠습니다.
 
 Elixir provides the concept of enumerables and [the `Enum` module](/docs/stable/elixir/Enum.html) to work with them. We have already learned two enumerables: lists and maps.
 
@@ -22,11 +23,12 @@ iex> Enum.map(%{1 => 2, 3 => 4}, fn {k, v} -> k * v end)
 [2, 12]
 ```
 
-`Enum`モジュールはenumerableなアイテムを変形，並びかえ，グルーピング，フィルタリング，検索するための非常に多様な関数を提供しています．Elixirのコードの中で頻繁に利用するモジュールの一つです．
+`Enum` 모듈은 열거형의 items을 transform, sort, group, filter와 retrieve 할 수 있는 함수들을 제공합니다. 
+열거형 모듈은 Elixir 코드에서 자주 사용하는 모듈입니다.
 
 The `Enum` module provides a huge range of functions to transform, sort, group, filter and retrieve items from enumerables. It is one of the modules developers use frequently in their Elixir code.
 
-Elixirは範囲も提供しています:
+Elixir는 또한 ranges 도 제공합니다:
 
 Elixir also provides ranges:
 
@@ -37,15 +39,15 @@ iex> Enum.reduce(1..3, 0, &+/2)
 6
 ```
 
-ごらんの通りEnumモジュールは異なるデータ型でも動作するように考えられているので，そのAPIは様々なデータ型で使いやすいものだけになっています．あるデータ型固有の特徴的な操作はその固有のモジュールでやることになるでしょう．例えば，もしリストの特定の場所へ要素を挿入したい場合は，[`List`モジュール](/docs/stable/eliir/List.html)の関数`List.insert_at/3`を使うでしょう．たとえば範囲へ値を挿入するのはちょっと変な感じがしますもんね．
+보시는 바와 같이 Enum 모듈은 다른 데이터 타입과 동작하도록 설계되어서, 많은 데이터 타입들간의 사용할 수 있는 유용한 API는 제한적입니다. For specific operations, you may need to reach to modules specific to the data types(나중에번역). 예를들어, 만약 리스트의 특정위치에 요소(element)를 삽입하고 싶은 경우는 [the `List` module](/docs/stable/elixir/List.html)의 함수 `List.insert_at/3`을 사용할 것입니다. 하지만 특정 범위(range)에 값을 삽입하는 것은 좀 이상할것같네요.
 
 Since the Enum module was designed to work across different data types, its API is limited to functions that are useful across many data types. For specific operations, you may need to reach to modules specific to the data types. For example, if you want to insert an element at a given position in a list, you should use the `List.insert_at/3` function from [the `List` module](/docs/stable/elixir/List.html), as it would make little sense to insert a value into, for example, a range.
 
-様々なデータ型で動作するので，私たちは`Enum`モジュールの関数はポリモーフィックであると言っています．とりわけ`Enum`モジュールにある関数は[`Enumerable`プロトコル](/docs/stable/elixir/Enumerable.html)を実装したどんなデータ型でも動作するようになっています．後ほどプロトコルについて話しましょう，今はstreamと呼ばれるenumerableの一種をみていくことにします．
+다양한 데이터 타입으로 동작하기 때문에, 우리는 `Enum` 모듈의 함수는 다형성이라고 말하고 있습니다. 특히 `Enum` 모듈에 있는 함수는 [the `Enumerable` protocol](/docs/stable/elixir/Enumerable.html)을 구현한 어떤 데이터 타입에서도 동작하도록 되어 있습니다. 프로토콜에 대해서는 나중에 얘기하고 지금은 stream 이라는 enumerable의 한 종류를 살펴 보도록 합시다.
 
 We say the functions in the `Enum` module are polymorphic because they can work with diverse data types. In particular, the functions in the `Enum` module can work with any data type that implements [the `Enumerable` protocol](/docs/stable/elixir/Enumerable.html). We are going to discuss Protocols in a later chapter, for now we are going to move on to a specific kind of enumerable called streams.
 
-## 10.2 貪欲 vs 怠惰 - Eager vs Lazy
+## 10.2 Eager vs Lazy - Eager vs Lazy
 
 `Enum`モジュールの関数は全て貪欲です．たくさんの関数は一つのenumerableをとって一つのリストを返します:
 
