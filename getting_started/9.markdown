@@ -48,7 +48,7 @@ Similar to case, a function may have many clauses. A particular clause is execut
 
 Above when `print_multiple_times/2` is initially called, the argument `n` is equal to `3`.
 
-첫 번째 절은 `n` 이 `1` 과 같거나 작을 때 사용할 수있는 가드(guard)를 가지고 있습니다. 때문에 Elixir는 다음 절 정의로 이동합니다.
+첫 번째 절은 `n` 이 `1` 과 같거나 작을 때 사용할 수있는 가드(guard)를 가지고 있습니다. 때문에 Elixir는 다음 절의 정의로 이동합니다.
 
 The first clause has a guard which says use this definition if and only if `n` is less than or equal to `1`. Since this is not the case, Elixir proceeds to the next clause's definition.
 
