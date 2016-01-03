@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 11 プロセス - Processes
+title: 11 프로세스 - Processes
 guide: 11
 ---
 
