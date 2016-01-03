@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 19 シギル(印) - Sigils
+title: 19 Sigils - Sigils
 guide: 19
 ---
 
