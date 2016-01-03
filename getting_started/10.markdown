@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 10 enumerableとstream - Enumerables and Streams
+title: 10 enumerable과 stream - Enumerables and Streams
 guide: 10
 ---
 
