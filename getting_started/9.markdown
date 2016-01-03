@@ -8,7 +8,7 @@ guide: 9
 
   <div class="toc"></div>
 
-イミュータブル(不変)という性質を持つため，Elixir(や関数型言語)でのループは従来の手続き型言語とは異なる書き方をします．例えば，手続き型ではこんな感じで書くでしょう:
+불변성 때문에 Elixir(그리고 함수형 언어)에서 루프는 기존의 절차적 언어와는 다른 방식으로 작성합니다. 예를들어, 절차적 언어에서는 이런 식으로 작성됩니다:
 
 Due to immutability, loops in Elixir (and in functional programming languages) are written differently from conventional imperative languages. For example, in an imperative language, one would write:
 
