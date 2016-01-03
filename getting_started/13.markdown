@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 13 alias，requireとimpot - alias, require and import
+title: 13 alias，require와 import - alias, require and import
 guide: 13
 ---
 
