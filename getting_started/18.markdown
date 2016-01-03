@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 18 内包表記 - Comprehensions
+title: 18 Comprehensions - Comprehensions
 guide: 18
 ---
 
