@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 17 トライ，キャッチとレスキュー - try, catch and rescue
+title: 17 try, catch and rescue - try, catch and rescue
 guide: 17
 ---
 
