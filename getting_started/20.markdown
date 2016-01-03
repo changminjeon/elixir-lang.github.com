@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 20 次にどこへ行こう - Where to go next
+title: 20 다음에 배울것은 - Where to go next
 guide: 20
 last: true
 ---
