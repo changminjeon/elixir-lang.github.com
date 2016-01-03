@@ -60,11 +60,11 @@ The second definition matches the pattern and has no guard so it will be execute
 
 Because `n` is now set to `1`, the guard to our first definition of `print_multiple_times/2` evaluates to true, and we execute this particular definition. The `msg` is printed, and there is nothing left to execute.
 
-두 번째 인자로써 어떤 수가 전달되는지 상관없이 첫 번째 정의("베이스 케이스"라고 합니다)를 트리거(trigger) 하거나 베이스 케이스에 한번에 갈수있는 두번째 정의가 트리거(trigger) 되는 `print_multuple_times/2` 를 정의했습니다.(아 뭔가 대단히 어색함...)
+두번째 인자가 어떤값이던지 첫번째 정의("베이스 케이스"라고 합니다)를 호출(trigger)하던지 두번째 정의를 호출하는(trigger) `print_multuple_times/2`를 정의했습니다.
 
 We defined `print_multiple_times/2` so that no matter what number is passed as the second argument it either triggers our first definition (known as a "base case") or it triggers our second definition which will ensure that we get exactly 1 step closer to our base case.
 
-リストにある数の合計を求めるときに再帰の力をどう使えるか見てみましょう:
+리스트에있는 숫자의 합을 구할 때 재귀의 힘을 어떻게 사용하는지를 살펴 봅시다:
 
 Let's now see how we can use the power of recursion to sum a list of numbers:
 
@@ -82,11 +82,11 @@ end
 Math.sum_list([1, 2, 3], 0) #=> 6
 ```
 
-`sum_list`へ引数としてリスト`[1,2,3]`と初期値`0`を渡して呼び出しています．パターンマッチングのルールと一致するものが見つかるまで，それぞれの句へマッチを試みていきます．この場合だとリスト`[1,2,3]`は`[head|tail]`へマッチし，`head = 1`と`tail = [2,3]`，`accumulator`は`0`へと割り当てられます．
+`sum_list`에 인자로 리스트 `[1,2,3]`과 초기값 `0` 을 전달하여 호출합니다. 패턴 매칭 규칙과 일치하는것을 찾을때까지 각 절에 매칭를 시도하고 있습니다. 이 경우 리스트 `[1,2,3]` 은 `[head|tail]`에 매치하고 `head = 1` 과 `tail = [2,3]` , `accumulator` 는 `0` 으로 할당됩니다.
 
 We invoke `sum_list` with a list `[1,2,3]` and the initial value `0` as arguments. We will try each clause until we find one that matches according to the pattern matching rules. In this case, the list `[1,2,3]` matches against `[head|tail]` which assigns `head = 1` and `tail = [2,3]` while `accumulator` is set to `0`.
 
-次にリストの先端(head)とアキュムレーターを足し(`head + accumulator`)，リストの残り(tail)を1番目の引数として渡して`sum_list`を再帰的に呼び出します．リストの残りは再び`[head|tail]`へマッチし，リストが空になるまで以下のように続きます:
+그런다음 리스트의 head값을 누적변수에 `head + accumulator` 더한다음 리스트의 tail을 첫번째 인자로로 전달하는 `sum_list`를 재귀적으로 호출합니다. 리스트의 나머지는 전체 리스트가 비어질때까지 `[head|tail]`에 일치시키며 다음과 같이 계속됩니다:
 
 Then, we add the head of the list to the accumulator `head + accumulator` and call `sum_list` again, recursively, passing the tail of the list as its first argument. The tail will once again match `[head|tail]` until the list is empty, as seen below:
 
@@ -97,15 +97,15 @@ sum_list [3], 3
 sum_list [], 6
 ```
 
-リストが空になると，最後の句にマッチし最終結果の`6`が返ります．
+리스트가 비어 있으면, 마지막 절에 매치되어 최종 결과 `6` 이 리턴됩니다.
 
 When the list is empty, it will match the final clause which returns the final result of `6`.
 
-このリストをとって一つの値へ"減らしていく(reducing)"という手法は"reduce"アルゴリズムと呼ばれており，関数型プログラミングの中心をなしています．
+리스트를 취하고 하나의 값으로 "줄여 나간다 (reducing)"라는 과정은 "reduce" 알고리즘이라고하고 함수형 프로그래밍의 중심을 이루고 있습니다.
 
 The process of taking a list and "reducing" it down to one value is known as a "reduce" algorithm and is central to functional programming.
 
-もしリストの全ての値を2倍にしたければ何をすればよいでしょう？
+만약 리스트의 모든 값을 두배로하고 싶다면 어떻게 해야할까요?
 
 What if we instead want to double all of the values in our list?
 
@@ -123,15 +123,15 @@ end
 Math.double_each([1, 2, 3]) #=> [2, 4, 6]
 ```
 
-リストを再帰的にたどり，全ての要素を2倍にし，新しいリストを返しています．この，リストをとって"写しとる(mapping)"手法は"map"アルゴリズムと呼ばれています．
+모든 요소를 2배로 하고 새로운 리스트를 리턴하기 위해 재귀를 사용했습니다. 이렇게 리스트를 취하고 "mapping" 하는 기법은 "map" 알고리즘이라고합니다.
 
 Here we have used recursion to traverse a list doubling each element and returning a new list. The process of taking a list and "mapping" over it is known as a "map" algorithm.
 
-再帰と末尾呼び出し最適化はElixirの重要な部分で，ループを作るのによく利用されています．しかしElixirでプログラミングしているときにリストの操作に上でやったような再帰を使うことはほとんどないでしょう．
+재귀와 꼬리(tail) 호출 최적화는 Elixir의 중요한 부분으로 루프를 만드는 데 자주 이용되고 있습니다. 그러나 Elixir로 프로그래밍 할 때 위에서 그랬던 것처럼 리스트를 조작할때 재귀를 사용할 일은 거의 없을 것입니다.
 
 Recursion and tail call optimization are an important part of Elixir and are commonly used to create loops. However, when programming Elixir you will rarely use recursion as above to manipulate lists.
 
-次の章で学ぶ[`Enum`モジュール](/docs/stable/elixir/Enum.html)は既にリストを扱うのに便利な様々なものを提供しています．例えば上の例は次のように書けてしまいます:
+다음 장에서 배울 [`Enum` module](/docs/stable/elixir/Enum.html)은 이미 리스트을 다루는데 여러가지 편리한것들을 제공합니다. 위 예는 다음과 같이 작성될수 있습니다:
 
 The [`Enum` module](/docs/stable/elixir/Enum.html), which we are going to study in the next chapter, already provides many conveniences for working with lists. For instance, the examples above could be written as:
 
@@ -142,7 +142,7 @@ iex> Enum.map([1, 2, 3], fn(x) -> x * 2 end)
 [2, 4, 6]
 ```
 
-あるいはキャプチャー構文を使えばこのように:
+또는 캡쳐(capture) 문법을 사용하면:
 
 Or, using the capture syntax:
 
@@ -153,6 +153,6 @@ iex> Enum.map([1, 2, 3], &(&1 * 2))
 [2, 4, 6]
 ```
 
-それではEnumerableとStreamについてもっと詳しくみていきましょう．
+그래서 Enumerable와 Stream에 대해 좀 더 자세히 살펴 보겠습니다.
 
 So let's take a deeper look at Enumerables and Streams.
