@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 14 モジュールのアトリビュート - Module attributes
+title: 14 모듈 속성(attributes) - Module attributes
 guide: 14
 ---
 
