@@ -1,6 +1,6 @@
 ---
 layout: getting_started
-title: 16 プロトコル - Protocols
+title: 16 프로토콜 - Protocols
 guide: 16
 ---
 
