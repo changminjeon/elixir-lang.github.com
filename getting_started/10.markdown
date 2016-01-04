@@ -39,7 +39,7 @@ iex> Enum.reduce(1..3, 0, &+/2)
 6
 ```
 
-보시는 바와 같이 Enum 모듈은 다른 데이터 타입과 동작하도록 설계되어서, 많은 데이터 타입들간의 사용할 수 있는 유용한 API는 제한적입니다. For specific operations, you may need to reach to modules specific to the data types(나중에번역). 예를들어, 만약 리스트의 특정위치에 요소(element)를 삽입하고 싶은 경우는 [the `List` module](/docs/stable/elixir/List.html)의 함수 `List.insert_at/3`을 사용할 것입니다. 하지만 특정 범위(range)에 값을 삽입하는 것은 좀 이상할것같네요.
+보시는 바와 같이 Enum 모듈은 다른 데이터 타입과 동작하도록 설계되어서, 많은 데이터 타입들간의 사용할 수 있는 유용한 API는 제한적입니다. For specific operations, you may need to reach to modules specific to the data types(나중에번역). 예를들어, 만약 리스트의 특정위치에 요소(element)를 삽입하고 싶은 경우는 [the `List` module](/docs/stable/elixir/List.html)의 함수 `List.insert_at/3`을 사용할 것입니다. 하지만 특정 범위(range)에 값을 삽입하는 것은 좀 이상할 것 같습니다.
 
 Since the Enum module was designed to work across different data types, its API is limited to functions that are useful across many data types. For specific operations, you may need to reach to modules specific to the data types. For example, if you want to insert an element at a given position in a list, you should use the `List.insert_at/3` function from [the `List` module](/docs/stable/elixir/List.html), as it would make little sense to insert a value into, for example, a range.
 
@@ -49,7 +49,7 @@ We say the functions in the `Enum` module are polymorphic because they can work 
 
 ## 10.2 Eager vs Lazy - Eager vs Lazy
 
-`Enum`モジュールの関数は全て貪欲です．たくさんの関数は一つのenumerableをとって一つのリストを返します:
+`Enum` 모듈의 모든 함수들은 탐욕적(eager)입니다. 많은 함수들은 열거형(enumerable)을 인자로 받고 리스트를 돌려줍니다:
 
 All the functions in the `Enum` module are eager. Many functions expect an enumerable and return a list back:
 
@@ -60,7 +60,7 @@ iex> Enum.filter(1..3, odd?)
 [1, 3]
 ```
 
-つまり`Enum`で複数の操作をしたとき，結果が出るまで全ての操作が中間リストを作るということになります:
+즉, `Enum`에서 여러 오퍼레이션(operations)을 했을 때, 결과가 나올 때까지 각각의 오퍼레이션이 중간 리스트를 만든다는걸 의미합니다:
 
 This means that when performing multiple operations with `Enum`, each operation is going to generate an intermediate list until we reach the result:
 
@@ -69,11 +69,11 @@ iex> 1..100_000 |> Enum.map(&(&1 * 3)) |> Enum.filter(odd?) |> Enum.sum
 7500000000
 ```
 
-上の例は操作をパイプラインでつなげています．まず範囲からはじまり，範囲の全ての要素を3倍します．最初の操作で`100_000`個の要素のリストができます．次にリストの中の全ての奇数を残すと，`50_000`個の要素をもった新しいリストができ，それから全ての要素を足し合わせます．
+위의 예는 오퍼레이션(operations)들의 파이프 라인으로 연결되어 있습니다. 우선 레인지(range)에서 시작해, 레인지(range)의 모든 요소(element)에 3을 곱합니다. 첫째 단계는 `100_000`개 아이템(items)의 리스트를 만듭니다. 그러고 나서 해당 리스트로부터 `50_000`개의 홀수값만 가지는 새로운 리스트를 생성하고 모든 값들을 더합니다.
 
 The example above has a pipeline of operations. We start with a range and then multiply each element in the range by 3. This first operation will now create and return a list with `100_000` items. Then we keep all odd elements from the list, generating a new list, now with `50_000` items, and then we sum all entries.
 
-Elixirではかわりに，遅延操作できる[`Stream`モジュール](/docs/stable/elixir/Stream.html)を用意しています．
+이러한 대안으로써 Elixir는 [the `Stream` module](/docs/stable/elixir/Stream.html)모듈을 통해 지연(lazy) 오퍼레이션을 지원합니다.
 
 As an alternative, Elixir provides [the `Stream` module](/docs/stable/elixir/Stream.html) which supports lazy operations:
 
@@ -82,17 +82,17 @@ iex> 1..100_000 |> Stream.map(&(&1 * 3)) |> Stream.filter(odd?) |> Enum.sum
 7500000000
 ```
 
-中間リストを生成するかわりに，streamは`Enum`モジュールへ値を渡したときだけ実行される一連の処理を作ります．streamは大きかったり*無限かもしれない*集まりを扱うのに便利です．
+중간 리스트를 생성하는 대신에, stream은 `Enum`모듈에 값을 전달했을 때만 실행되는 일련의 처리를 만듭니다. stream은 무한대의 컬렉션(collections)을 다룰때 유용합니다.
 
 Instead of generating intermediate lists, streams create a series of computations that are invoked only when we pass it to the `Enum` module. Streams are useful when working with large, *possibly infinite*, collections.
 
 ## 10.3 stream - Streams
 
-streamはlazyで，composableなenumerableです．
+stream은 지연(lazy)될수 있고 조합가능한(composable) 열거형(enumerable)입니다.
 
 Streams are lazy, composable enumerables.
 
-上の例で観たように`1..100_000 |> Stream.map(&(&1 * 3))`は`1..100_000`の範囲に対して`map`を処理する表現であるstreamというデータ型を返すので，lazyです．
+위의 예에서 살펴본 것처럼 `1..100_000 |> Stream.map(&(&1 * 3))`은 " `1..100_000`의 레인지(range)를 가지고 `map`으로 처리한다는 표현을 실제 stream 데이터 타입으로 리턴합니다. 실제계산은 이루어지지 않고 Stream만 리턴되기때문에 계산이 지연(lazy)됐다라고 할수 있습니다.
 
 They are lazy because, as shown in the example above, `1..100_000 |> Stream.map(&(&1 * 3))` returns a data type, an actual stream, that represents the `map` computation over the range `1..100_000`:
 
@@ -101,7 +101,7 @@ iex> 1..100_000 |> Stream.map(&(&1 * 3))
 #Stream<[enum: 1..100000, funs: [#Function<34.16982430/1 in Stream.map/2>]]>
 ```
 
-さらに，複数のstream処理を通せるため，composableです．
+또한 여러개의 stream 오퍼레이션(operations)를 파이프라이닝(pipe)할수 있기 때문에 조합가능(composable)합니다.
 
 Furthermore, they are composable because we can pipe many stream operations:
 
@@ -110,7 +110,7 @@ iex> 1..100_000 |> Stream.map(&(&1 * 3)) |> Stream.filter(odd?)
 #Stream<[enum: 1..100000, funs: [...]]>
 ```
 
-`Stream`モジュールは引数へ全てのenumerableでも受けつけ，結果としてStreamを返します．無限になるかもしれないstreamを作る関数も用意しています．例えば`Stream.cycle/1`は与えられたenumerableを無限に繰り返すstreamを作るのに使われます．永遠に繰り返すことになるので，こういったstreamから`Enum.map/2`のような関数を呼び出すことのないように気をつけてください:
+`Stream`모듈의 많은 함수들은 인자에 어떠한 열거형(enumerable)을 허용하고 결과로 Stream을 리턴합니다. 또한, 무한한 데이터를 위한 함수도 있습니다. 예를들어 `Stream.cycle/1`은 주어진 열거형(enumerable)을 무한히 반복하는 stream을 만드는 데 사용될 수 있습니다. 영원히 반복하게되므로, 이러한 stream에서는 `Enum.map/2`와 같은 함수를 호출하지 않도록 주의하십시요:
 
 Many functions in the `Stream` module accept any enumerable as argument and return a stream as result. It also provides functions for creating streams, possibly infinite. For example, `Stream.cycle/1` can be used to create a stream that cycles a given enumerable infinitely. Be careful to not call a function like `Enum.map/2` on such streams, as they would cycle forever:
 
@@ -121,7 +121,7 @@ iex> Enum.take(stream, 10)
 [1, 2, 3, 1, 2, 3, 1, 2, 3, 1]
 ```
 
-一方`Stream.unfold/2`は与えられた初期値から値を生成するのに使われます:
+한편 `Stream.unfold/2`는 주어진 초기 값에서 값을 생성하는 데 사용됩니다:
 
 On the other hand, `Stream.unfold/2` can be used to generate values from a given initial value:
 
@@ -132,7 +132,7 @@ iex> Enum.take(stream, 3)
 ["h", "e", "ł"]
 ```
 
-その他の興味深い関数としてリソースを包むために使える`Stream.resource/3`があります．これはどこか途中で失敗したとしてもenumerationする前には正しく開かれ，終わったら閉じられることを保証します．例えば，私たちはファイルをstreamで扱うことができます:
+다른 흥미로운 기능으로 자원을 감싸기 위하여 사용할 수 있는 `Stream.resource/3`이 있습니다. 이것은 어딘가 도중에 실패하더라도 enumeration하기 전에 열린 자원들을 닫는것을 보장합니다(역자: 자바의 finally 같은 기능이라고 생각하면 됩니다). 예를들어, 우리는 파일을 stream으로 처리 할 수 있습니다:
 
 Another interesting function is `Stream.resource/3` which can be used to wrap around resources, guaranteeing they are opened right before enumeration and closed afterwards, even in case of failures. For example, we can use it to stream a file:
 
@@ -142,14 +142,14 @@ iex> stream = File.stream!("path/to/file")
 iex> Enum.take(stream, 10)
 ```
 
-上の例はあなたが選んだファイルの最初の10行を取得します．このようにstreamは大きいファイルやネットワークのような遅いリソースを扱うのにとても使いやすいです．
+위의 예는 당신이 선택한 파일의 처음 10 행을 가져옵니다. 이렇게 stream은 큰 파일이나 네트워크와 같이 느린 자원을 취급하는데 매우 유용합니다.
 
 The example above will fetch the first 10 lines of the file you have selected. This means streams can be very useful for handling large files or even slow resources like network resources.
 
-最初は[`Enum`](/docs/stable/elixir/Enum.html)や[`Stream`](/docs/stable/elixir/Stream.html)モジュールの関数や機能たちについて身構えてしまうでしょうが，回数を重ねるにつれだんだんと慣れていくでしょう．特に最初は`Enum`モジュールに集中して，遅いリソースや大きな（もしかしたら無限の）コレクションを扱うために遅延が必要であるものだけ`Stream`にしていくことになるでしょう．
+처음에는 [`Enum`](/docs/stable/elixir/Enum.html)과 [`Stream`](/docs/stable/elixir/Stream.html)모듈의 기능과 많은 함수에 주눅이 들 수 있지만, 횟수를 거듭하면서 점점 익숙해져 갈것입니다. 특히 처음에는 `Enum`모듈에 집중하고 느린 자원과 큰(혹시 무한)컬렉션을 처리하기 위해서는 지연(laziness)이 필요하다 것만 알면 됩니다.
 
 The amount of functions and functionality in [`Enum`](/docs/stable/elixir/Enum.html) and [`Stream`](/docs/stable/elixir/Stream.html) modules can be daunting at first but you will get familiar with them case by case. In particular, focus on the `Enum` module first and only move to `Stream` for the particular scenarios where laziness is required to either deal with slow resources or large, possibly infinite, collections.
 
-次はElixirの中心的な特徴である，並行，並列，分散処理を簡単にわかりやすく簡単に書けるようにしてくれる，プロセスについて見ることにします．
+다음은 Elixir의 중심이되는 특징인 동시성, 병렬성, 분산 처리 프로그램을 쉽고 이해할수 있는 방법으로 작성하게 해주는 프로세스(Processes)에 대해 알아보겠습니다.
 
 Next we'll look at a feature central to Elixir, Processes, which allows us to write concurrent, parallel and distributed programs in an easy and understandable way.
