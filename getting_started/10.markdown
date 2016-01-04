@@ -12,7 +12,7 @@ guide: 10
 ## 10.1 enumerable - Enumerables
 
 Elixir는 열거형(enumerable)컨셉을 제공하고 이것을 [the `Enum` module](/docs/stable/elixir/Enum.html)로 다룰수 있습니다.
-우리는 이미 2가지 열거형 리스트와 맵을 배웠습니다.
+우리는 이미 2가지 열거형: 리스트와 맵을 배웠습니다.
 
 Elixir provides the concept of enumerables and [the `Enum` module](/docs/stable/elixir/Enum.html) to work with them. We have already learned two enumerables: lists and maps.
 
