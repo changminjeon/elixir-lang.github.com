@@ -8,11 +8,11 @@ guide: 12
 
   <div class="toc"></div>
 
-この章はElixirの入出力機構，および，[`IO`](/docs/stable/elixr/IO.html)，[`File`](/docs/stable/elxir/File.html)あるいは[`Path`](/docs/stable/elixir/Path.html)などの入出力機構へ関連するモジュールについての紹介をします．
+이번장은 [`IO`](/docs/stable/elixir/IO.html), [`File`](/docs/stable/elixir/File.html)과 [`Path`](/docs/stable/elixir/Path.html)등의 입출력 장치와 관련된 모듈에 대해 소개합니다.
 
 This chapter is a quick introduction to input/output mechanisms in Elixir and related modules, like [`IO`](/docs/stable/elixir/IO.html), [`File`](/docs/stable/elixir/File.html) and [`Path`](/docs/stable/elixir/Path.html).
 
-この章の(入出力の)概要はGetting Startedの前の版にもすでにありました．ですが，入出力システムはElixirとそのVMについていくつかの方針とおもしろさへ光を当てるすばらしい機会を用意していることに気がつきました．
+이번장은 앞에서 살펴본 Getting Started 가이드에서 이미 살짝 맛본 내용들입니다. 하지만, 입출력 시스템은 Elixir와 VM에 대한 몇가지 철학을 살펴 볼 수 있게 해줍니다.
 
 We had originally sketched this chapter to come much earlier in the getting started guide. However, we noticed the IO system provides a great opportunity to shed some light on some philosophies and curiosities of Elixir and the VM.
 
