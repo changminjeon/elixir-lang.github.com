@@ -12,7 +12,7 @@ guide: 1
 
 Welcome!
 
-이번 튜토리얼을 통해 Elixir를 시작할것입니다. 이번장에서는 Elixir가 잘 설치 됐는지 Elixir 인터랙티브 쉘이 잘 동작하는지에 대해 살펴볼것입니다.
+이번 튜토리얼에서 Elixir를 시작할것입니다. 이번장에서는 Elixir가 잘 설치되고 Elixir 인터랙티브 쉘이 잘 동작하는지 살펴볼것입니다.
 
 In this tutorial we are going to get you started with Elixir. This chapter will focus on ensuring Elixir is installed and that you can sucessfully run Elixir's Interactive Shell, called IEx.
 
