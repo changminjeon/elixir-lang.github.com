@@ -8,7 +8,7 @@ guide: 13
 
   <div class="toc"></div>
 
-소프트웨어 재사용을 용이하게하기 위해, Elixir는 3개의 지시어(directives)를 제공합니다. 밑에서 살펴보겠지만, **lexical scope**를 가지고 있어 지시어(directives)라고 합니다.
+소프트웨어 재사용을 용이하게하기 위해 Elixir는 3개의 지시어(directives)를 제공합니다. 밑에서 살펴보겠지만 **lexical scope**를 가지고 있어 지시어(directives)라고 합니다.
 
 In order to facilitate software reuse, Elixir provides three directives. As we are going to see below, they are called directives because they have **lexical scope**.
 
@@ -38,7 +38,7 @@ Elixir.Math.List.flatten #=> uses Math.List.flatten
 
 > Note: All modules defined in Elixir are defined inside a main Elixir namespace. However, for convenience, you can omit "Elixir." when referencing them.
 
-Alias는 숏컷(shortcuts)을 정의하는데 자주 사용됩니다. 사실 `:as` 옵션 없이 `alias`를 호출하면 모듈 이름의 마지막 부분을 자동으로 별칭(alias)으로 설정합니다. 예를 들면:
+Alias는 숏컷(shortcuts)을 정의하는데 자주 사용됩니다. 사실 `:as`옵션 없이 `alias`를 호출하면 모듈 이름의 마지막 부분을 자동으로 별칭(alias)으로 설정합니다. 예를들면:
 
 Aliases are frequently used to define shortcuts. In fact, calling `alias` without an `:as` option sets the alias automatically to the last part of the module name, for example:
 
@@ -54,7 +54,7 @@ Is the same as:
 alias Math.List, as: List
 ```
 
-`alias`는 **lexical scope** 하기 때문에  특정 함수안에서도 별칭(alias)을 설정 할 수 있습니다:
+`alias`는 **lexical scope** 하기 때문에 특정 함수안에서도 별칭(alias)을 설정 할 수 있습니다:
 
 Note that `alias` is **lexically scoped**, which allows you to set aliases inside specific functions:
 
@@ -71,7 +71,7 @@ defmodule Math do
 end
 ```
 
-위의 예와 같이 `alias`를 함수 `plus/2` 에서 호출해도, 별칭(alias)은 함수 `plus/2` 내에서만 유효하며 `minus/2` 에 전혀 영향을주지 않습니다.
+위의 예와 같이 `alias`를 함수 `plus/2`에서 호출해도, 별칭(alias)은 함수 `plus/2`내에서만 유효하며 `minus/2`에 전혀 영향을주지 않습니다.
 
 In the example above, since we are invoking `alias` inside the function `plus/2`, the alias will just be valid inside the function `plus/2`. `minus/2` won't be affected at all.
 
@@ -98,7 +98,7 @@ Elixir에서 `Integer.is_odd?/1`는 매크로로 정의되어 있기 때문에 �
 
 In Elixir, `Integer.is_odd/1` is defined as a macro so it can be used as guards. This means that, in order to invoke `Integer.is_odd/1`, we need to first require the `Integer` module.
 
-일반적으로 모듈의 매크로를 사용하려고하는 경우를 제외하고는 사용하기 전에 모듈이 필요한 것은 아닙니다. 로드되지 않은 매크로를 호출하려고 하면 오류가 발생합니다. `alias` 지시어(directives)와 마찬가지로 `require`도 lexically scoped인 것에 주목하십시오. 매크로에 대해서는 이후의 장에서 다시 자세히 이야기 할것입니다.
+일반적으로 모듈의 매크로를 사용하는 경우를 제외하고는 사용하기 전에 모듈을 require할 필요가 없습니다. 로드되지 않은 매크로를 호출하려고 하면 오류가 발생합니다. `alias` 지시어(directives)와 마찬가지로 `require`도 lexically scoped인 것에 주목하십시오. 매크로에 대해서는 이후의 장에서 다시 자세히 이야기 할것입니다.
 
 In general a module does not need to be required before usage, except if we want to use the macros available in that module. An attempt to call a macro that was not loaded will raise an error. Note that like the `alias` directive, `require` is also lexically scoped. We will talk more about macros in a later chapter.
 
