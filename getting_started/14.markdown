@@ -219,7 +219,7 @@ defmodule MyTest do
 end
 ```
 
-ExUnit 태그는 테스트에 주석을 사용합니다. 태그는 나중에 테스트를 필터링할때도 사용합니다. 예를들어 외부에 의존하고 느린 테스트를 생략할수도 있습니다. 반면에 빌드시스템에서는 여전히 활성화될수 있습니다.
+테스트에 주석을 달기 위해 ExUnit 태그를 사용합니다. 테스트를 필터링하기 위해 나중에 태그를 사용할수도 있습니다. 예를들어 외부에 의존하고 느린 테스트를 생략할수도 있습니다. 반면에 빌드시스템에서는 여전히 활성화될수 있습니다.
 
 Tags in ExUnit are used to annotate tests. Tags can be later used to filter tests. For example, you can avoid running external tests on your machine because they are slow and dependent on other services, while they can still be enabled in your build system.
 
