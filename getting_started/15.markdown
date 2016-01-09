@@ -8,7 +8,7 @@ guide: 15
 
   <div class="toc"></div>
 
-以前の章でマップについて学びました:
+앞선 장에서는 맵에 대해 배웠습니다:
 
 In earlier chapters, we learned about maps:
 
@@ -21,11 +21,11 @@ iex> %{map | a: 3}
 %{a: 3, b: 2}
 ```
 
-構造体は，初期値，コンパイル時の保証および多態をElixirへもたらす，マップを利用した拡張です．
+구조체는 기본값과 컴파일시간을 보장하고 다형성을 가지는 맵의 확장판입니다.
 
 Structs are extensions on top of maps that bring default values, compile-time guarantees and polymorphism into Elixir.
 
-構造体を定義するには，モジュールの中で単に`defstruct/1`を呼びます:
+구조체를 정의하기 위해서는 모듈에서 단순히 `defstruct/1`를 호출하면 됩니다:
 
 To define a struct, we just need to call `defstruct/1` inside a module:
 
