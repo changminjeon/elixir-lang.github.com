@@ -8,15 +8,15 @@ guide: 16
 
   <div class="toc"></div>
 
-プロトコルはElixirで多態を生み出すための機構です．プロトコルの処理は，どんなデータ型に対しても，そのデータ型がそのプロトコルを実装さえしていれば処理できます．例を見てみましょう．
+프로토콜은 다형성을 위한 메커니즘입니다. 프로토콜이 구현되어 있는 동안에는 어떠한 데이터 타입도 디스패칭할 수 있습니다. 예제를 살펴봅시다.
 
 Protocols are a mechanism to achieve polymorphism in Elixir. Dispatching on a protocol is available to any data type as long as it implements the protocol. Let's see an example.
 
-Elixirでは`false`と`nil`だけがfalseとして扱われます．他の全てはtrueと評価されます．アプリケーションによっては，それがブランクであると考えられるべきときに真偽値を返すような`blank?`プロトコルを規定することが重要になるかもしれません．
+Elixir에서는 `false`와 `nil`은 false로 처리됩니다. 그렇지 않는것들은 모두 true입니다. 어떠한 데이터 타입대해서도 값이 비어있는지 확인하기 위해 `blank?`라는 프로토콜이 필요한 어플케이션이 있다고 해봅시다. 예를들어, 비어있는 리스트 또는 비어있는 바이너리는 비어있다고 할 수 있습니다.
 
 In Elixir, only `false` and `nil` are treated as false. Everything else evaluates to true. Depending on the application, it may be important to specify a `blank?` protocol that returns a boolean for other data types that should be considered blank. For instance, an empty list or an empty binary could be considered blanks.
 
-以下のようにプロトコルを定義できます:
+이 프로토콜은 아래와 같이 정의 할 수 있습니다:
 
 We could define this protocol as follows:
 
@@ -27,23 +27,23 @@ defprotocol Blank do
 end
 ```
 
-このプロトコルは`blank?`と呼ばれる，一つの引数を取る関数が実装されることを期待しています．このプロトコルを別のElixirデータ型で以下のように実装してみましょう:
+하나의 인자를 받는 `blank?`라는 함수를 프로토콜로 정의했습니다. 이제 Elixir의 다른 데이터타입에 대해서도 아래와 같이 프로토콜을 구현할 수 있습니다:
 
 The protocol expects a function called `blank?` that receives one argument to be implemented. We can implement this protocol for different Elixir data types as follows:
 
 ```elixir
-# 整数は決してブランクにならない - Integers are never blank
+# Integers are never blank
 defimpl Blank, for: Integer do
   def blank?(_), do: false
 end
 
-# 空リストのときだけブランクになる - Just empty list is blank
+# Just empty list is blank
 defimpl Blank, for: List do
   def blank?([]), do: true
   def blank?(_),  do: false
 end
 
-# 空のマップのときだけブランクになる - Just empty map is blank
+# Just empty map is blank
 defimpl Blank, for: Map do
   # Keep in mind we could not pattern match on %{} because
   # it matches on all maps. We can however check if the size
@@ -51,7 +51,7 @@ defimpl Blank, for: Map do
   def blank?(map), do: map_size(map) == 0
 end
 
-# アトムがfalseとnilのときだけブランクになる - Just the atoms false and nil are blank
+# Just the atoms false and nil are blank
 defimpl Blank, for: Atom do
   def blank?(false), do: true
   def blank?(nil),   do: true
@@ -59,7 +59,7 @@ defimpl Blank, for: Atom do
 end
 ```
 
-元々ある全てのデータ型について同じようにしていきます．型はこれだけあります:
+그리고 모든 네이티브 데이터 타입에도 쓸 수 있습니다. 사용할 수 있는 타입들은:
 
 And we would do so for all native data types. The types available are:
 
@@ -75,7 +75,7 @@ And we would do so for all native data types. The types available are:
 * `Reference`
 * `Tuple`
 
-今，手元でプロトコルが定義され，実装もしました．すると呼び出すことができます:
+이제 구현된 프로토콜이 있으니 호출할 수 있습니다:
 
 Now with the protocol defined and implementations in hand, we can invoke it:
 
@@ -88,7 +88,7 @@ iex> Blank.blank?([1, 2, 3])
 false
 ```
 
-プロトコルを実装していないデータ型を渡すとエラーが発生します:
+구현되지 않는 데이터 타입의 프로토콜은 에러를 던집니다:
 
 Passing a data type that does not implement the protocol raises an error:
 
@@ -97,13 +97,13 @@ iex> Blank.blank?("hello")
 ** (Protocol.UndefinedError) protocol Blank not implemented for "hello"
 ```
 
-## 16.1 プロトコルと構造体 - Protocols and structs
+## 16.1 프로토콜과 구조체 - Protocols and structs
 
-Elixirの拡張性はプロトコルと構造体が一緒に使われたときに効果を発揮します．
+프로토콜과 구조체가 함께할때 Elixir의 확장성의 파워를 가질수 있습니다.
 
 The power of Elixir's extensibility comes when protocols and structs are used together.
 
-前の章で，構造体はマップであるけれども，プロトコルの実装はマップと共有していないということを学びました．前の章にあった`User`という構造体を定義してみましょう:
+이전 장에서 구조체는 맵의 프로토콜 구현을 가지지 않는 맵이라고 배웠습니다. 이전 장에서의 `User`를 다시 정의해봅시다:
 
 In the previous chapter, we have learned that although structs are maps, they do not share protocol implementations with maps. Let's define a `User` struct as in the previous chapter:
 
@@ -115,7 +115,7 @@ iex> defmodule User do
  <<70, 79, 82, ...>>, {:__struct__, 0}}
 ```
 
-そして確かめます:
+그리고 나서 확인해보면:
 
 And then check:
 
@@ -126,7 +126,7 @@ iex> Blank.blank?(%User{})
 ** (Protocol.UndefinedError) protocol Blank not implemented for %User{age: 27, name: "john"}
 ```
 
-構造体は，マップとプロトコルの実装を共有するのではなく，自身でプロトコルを実装することを求めます．
+맵의 프로토콜 구현을 가지는것 대신에 구조체는 자기자신만의 프로토콜 구현을 가질 수 있습니다:
 
 Instead of sharing protocol implementation with maps, structs require their own protocol implementation:
 
@@ -136,11 +136,12 @@ defimpl Blank, for: User do
 end
 ```
 
-必要に応じて，ユーザーがブランクであるという独自の意味を持たせることができます．それだけではなく，構造体をもっと堅牢な，たとえばキューのようなデータ型を構築するのに使うことができます，そしてそのようなデータ型のために，関連した全てのプロトコル，例えば`Enumerable`やおそらく`Blank`を実装する必要があります．
+필요하다면 비어있는 User에 대해 독자적인 의미를 부여할수도 있습니다. 뿐만 아니라 큐와같이 좀 더 탄탄한 구조체를 만들거나 `Enumerable`과 `Blank`같은 관련있는 모든 프로토콜 구현하기위해 구조체를 사용할 수 있습니다.
 
 If desired, you could come up with your own semantics for a user being blank. Not only that, you could use structs to build more robust data types, like queues, and implement all relevant protocols, such as `Enumerable` and possibly `Blank`, for this data type.
 
-わかりきったプロトコル実装を全ての構造体へ行うのは面倒ですから．開発者は手動で実装していない構造体へ使うデフォルト実装を用意したくなります，
+그러나 대부분의 경우, 개발자는 모든 구조체에 구현을 명시하는 지루함보다 기본 구현을 제공하길 원할것입니다.
+그럴때는 Any 데이터 타입으로 falling back 하는게 도움이 됩니다.
 
 In many cases though, developers may want to provide a default implementation for structs, as explicitly implementing the protocol for all structs can be tedious. That's when falling back to Any comes in handy.
 
