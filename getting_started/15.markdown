@@ -37,7 +37,7 @@ iex> defmodule User do
  <<70, 79, 82, ...>>, {:__struct__, 0}}
 ```
 
-すると`%User{}`構文を使って構造体の"インスタンス"が作れるようになります:
+`%User{}`문법을 사용하여 구조체의 "instances"를 생설할수 있습니다:
 
 We can now create "instances" of this struct by using the `%User{}` syntax:
 
@@ -50,7 +50,7 @@ iex> is_map(%User{})
 true
 ```
 
-構造体は，用意しているフィールドが存在することをコンパイル時に保証します．
+구조체는 컴파일시간에 제공된 필드만 사용할 수 있습니다:
 
 Structs give compile-time guarantees that the provided fields exist in the struct:
 
@@ -59,7 +59,7 @@ iex> %User{oops: :field}
 ** (CompileError) iex:3: unknown key :oops for struct User
 ```
 
-マップについて話したとき，既にあるマップのフィールドに対してアクセスやアップデートをできることを示しました．同じことを構造体にもやってみましょう:
+맵을 다뤘을때 어떻게 존재하는 필드에 대해 접근하고 업데이트하는지 보여줬습니다. 구조체도 동일하게 적용됩니다:
 
 When discussing maps, we demonstrated how we can access and update existing fields of a map. The same applies to structs:
 
@@ -74,11 +74,11 @@ iex> %{meg | oops: :field}
 ** (ArgumentError) argument error
 ```
 
-アップデートの構文を使うと，VMはマップ/構造体へ新しいキーが何も追加されないことを認識し，マップがメモリ内で構造を共有できるようにします．上の例だと，`john`と`meg`はどちらも同じキーを共有しています．
+업데이트 문법을 사용함으로써 새로운 키는 맵/구조체에 추가되지 않을것이며 메모리에 있는 맵의 구조를 공유할 수 있습니다. 위의 예제에서 `john`과 `meg`는 메모리에 있는 동일 키 구조를 공유합니다.
 
 By using the update syntax, the VM is aware no new keys will be added to the map/struct, allowing the maps to share their structure in memory. In the example above, both `john` and `meg` share the same key structure in memory.
 
-構造体はパターンマッチングでもよく用いられ，構造体の型が同じであることを保証します:
+구조체는 동일 타입의 구조체를 패턴매칭할때도 사용할 수 있습니다:
 
 Structs can also be used in pattern matching and they guarantee the structs are of the same type:
 
@@ -91,7 +91,7 @@ iex> %User{} = %{}
 ** (MatchError) no match of right hand side value: %{}
 ```
 
-マッチングが動作するのは構造体がマップの中に`__struct__`というフィールドを保存しているからです:
+맵안에 `__struct__` 필드 네임을 저장하기 때문에 구조체를 매칭 시킬수 있습니다:
 
 Matching works because structs store a field named `__struct__` inside the map:
 
@@ -100,7 +100,7 @@ iex> john.__struct__
 User
 ```
 
-全体として，構造体は単にデフォルトのフィールドがあるだけの剥き出しのマップです．剥き出しのマップと言ったところに注目してください．マップは構造体のために何のプロトコルも実装していません．例えば構造体を列挙するようなアクセスはできません:
+전반적으로 구조체는 단지 디폴트 필드를 가지는 bare 맵입니다. 맵에서는 사용할 수 있는 구현된 프로토콜이 없기 때문에 bare 맵이라고 할 수 있습니다. 예를들어, 구조체를 열거할수도 접근할수도 없습니다:
 
 Overall, a struct is just a bare map with default fields. Notice we say it is a bare map because none of the protocols implemented for maps are available for structs. For example, you can't enumerate nor access a struct:
 
@@ -111,7 +111,7 @@ iex> user[:name]
 ** (Protocol.UndefinedError) protocol Access not implemented for %User{age: 27, name: "john"}
 ```
 
-構造体ディクショナリでもないので，`Dict`モジュールからも使えません:
+구조체는 딕셔너리도 아니기 때문에 `Dict`모듈로도 사용할 수 없습니다:
 
 A struct also is not a dictionary and therefore can't be used with the `Dict` module:
 
@@ -119,6 +119,8 @@ A struct also is not a dictionary and therefore can't be used with the `Dict` mo
 iex> Dict.get(%User{}, :name)
 ** (ArgumentError) unsupported dict: %User{name: "john", age: 27}
 ```
+
+구조체는 단순히 맵이기 때문에 `Map`모듈로만 사용할 수 있습니다:
 
 Since structs are just maps, they will work with the `Map` module:
 
@@ -129,6 +131,6 @@ iex> Map.merge(%User{age: 27}, %User{name: "takashi"})
 %User{age: 27, name: "takashi"}
 ```
 
-次の章でどうやって構造体がプロトコルを使ってやりとりするか見ていきます．
+다음장에서는 구조체가 어떻게 프로토콜하고 상호작용하는지 살펴 볼 것입니다.
 
 We will cover how structs interacts with protocols in the next chapter.
