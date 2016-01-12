@@ -8,7 +8,8 @@ guide: 17
 
   <div class="toc"></div>
 
-エリクサーは3つのエラー機構を持っています: エラー，スローそしてイグジットです．この章ではそれらについて，それぞれどんな時に使われるとよいかも含めて詳しくみていきましょう．
+Elixir는 3가지(errors, throws and exits)에러 메커니즘을 가지고 있습니다.
+이 장에서는 각각에 대해 어떨때 사용하면 좋은지 살펴보겠습니다.
 
 Elixir has three error mechanisms: errors, throws and exits. In this chapter we will explore each of them and include remarks about when each should be used.
 
