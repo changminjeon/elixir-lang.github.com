@@ -145,9 +145,9 @@ If desired, you could come up with your own semantics for a user being blank. No
 
 In many cases though, developers may want to provide a default implementation for structs, as explicitly implementing the protocol for all structs can be tedious. That's when falling back to Any comes in handy.
 
-## 16.2 何かに立ち戻る -  Falling back to Any
+## 16.2 Falling back to Any
 
-全ての型のためのデフォルトの実装が用意されていれば便利ですよね．プロトコル定義の中で`@fallback_to_any`を`true`に設定するとできるようになります:
+모든 타입에 대해 기본 구현이 제공되면 편할것입니다. 이를 위해서는 프로토콜 정의에 `@fallback_to_any`를 `true`로 설정하면 됩니다.
 
 It may be convenient to provide a default implementation for all types. This can be achieved by setting `@fallback_to_any` to `true` in the protocol definition:
 
@@ -158,7 +158,7 @@ defprotocol Blank do
 end
 ```
 
-そしてこのように実装できます:
+이와같이 구현할수 있습니다:
 
 Which can now be implemented as:
 
@@ -168,13 +168,13 @@ defimpl Blank, for: Any do
 end
 ```
 
-今，`Blank`プロトコルを実装していない，全ての(構造体を含む)データ型は「ブランクではない」と考えられることになりました．
+이제 구현하지 않은 (구조체를 포함하여) 모든 데이터 타입의 `Blank`프로토콜은 non-blank로 간주됩니다.
 
 Now all data types (including structs) that we have not implemented the `Blank` protocol for will be considered non-blank.
 
-## 16.3 組み込みプロトコル - Built-in protocols
+## 16.3 내장된 프로토콜 - Built-in protocols
 
-Elixirにはいくつか組み込みのプロトコルがあります．以前の章で`Enumerable`プロトコルを実装しているならどんなデータ構造であっても動作する関数を沢山用意している`Enum`モジュールについてお話ししましたね:
+Elixir에는 일부 내장된 프로토콜이 있습니다. 이전 장에서 `Enumerable`프로토콜을 구현한 어떤 데이터 구조라도 다룰수 있는 `Enum`모듈에 대해 살펴봤습니다:
 
 Elixir ships with some built-in protocols. In previous chapters, we have discussed the `Enum` module which provides many functions that work with any data structure that implements the `Enumerable` protocol:
 
@@ -185,7 +185,7 @@ iex> Enum.reduce 1..3, 0, fn(x, acc) -> x + acc end
 6
 ```
 
-その他便利な例として，文字のあるデータ構造をどのように文字列に変換するかを規定した`String.Chars`プロトコルがあります，関数`to_string`で使っています:
+또다른 유용한 예로 문자 데이터 구조를 어떻게 문자열로 변환하는지 명시하는 `String.Chars`프로토콜이 있습니다. `to_string`함수에서 사용하고 있습니다:
 
 Another useful example is the `String.Chars` protocol, which specifies how to convert a data structure with characters to a string. It's exposed via the `to_string` function:
 
@@ -194,7 +194,7 @@ iex> to_string :hello
 "hello"
 ```
 
-Elixirの埋め込み文字列でも関数`to_string`を呼んでいることを覚えておいてください:
+문자열 interpolation도 `to_string`함수를 호출합니다:
 
 Notice that string interpolation in Elixir calls the `to_string` function:
 
@@ -203,7 +203,7 @@ iex> "age: #{25}"
 "age: 25"
 ```
 
-上の例は数値が`String.Chars`プロトコルを実装しているの動作しています．例えばタプルを渡すとエラーになります:
+위의 예는 숫자형이 `String.Chars`프로토콜을 구현하기때문에 동작합니다. 예를들어,튜플은 에러가 납니다:
 
 The snippet above only works because numbers implement the `String.Chars` protocol. Passing a tuple, for example, will lead to an error:
 
@@ -214,7 +214,7 @@ iex> "tuple: #{tuple}"
 ** (Protocol.UndefinedError) protocol String.Chars not implemented for {1, 2, 3}
 ```
 
-もっと複雑な"表示"が必要な場合，単に`Inspect`プロトコルによってできている関数`inspect`を利用するという方法もあります:
+더 복잡한 데이터 구조를 "출력"할 필요가 있는 경우 단순히 `Inspect`프로토콜의 `inspect`함수를 사용하면 됩니다:
 
 When there is a need to "print" a more complex data structure, one can simply use the `inspect` function, based on the `Inspect` protocol:
 
@@ -223,7 +223,7 @@ iex> "tuple: #{inspect tuple}"
 "tuple: {1, 2, 3}"
 ```
 
-`Inspect`プロトコルはデータ構造を読むことができるテキスト表現へと変換します．IExで結果を表示するのにも使っています:
+`Inspect`프로토콜은 어떠한 데이터 구조라도 읽을 수 있는 텍스트 표현으로 변환시켜줍니다. IEx에서 결과를 표시하는 데에도 사용하고 있습니다:
 
 The `Inspect` protocol is the protocol used to transform any data structure into a readable textual representation. This is what tools like IEx use to print results:
 
@@ -234,7 +234,7 @@ iex> %User{}
 %User{name: "john", age: 27}
 ```
 
-評価された値が`#`から始まるときは，エリクサーの構文ではない方法でデータ構造を表しているという意味を表すならわしになっていることを覚えておいてください．つまり検査したプロトコルの情報が一部失われることがあるためにその情報からは元に戻せないということです:
+inspect된 값이 `#`로 시작되는것들은 유효하지 않는 Elixir문법입니다. 이 말은 inspect된 프로토콜이 다시 돌이킬수 없는 정보라는 뜻입니다.
 
 Keep in mind that, by convention, whenever the inspected value starts with `#`, it is representing a data structure in non-valid Elixir syntax. This means the inspect protocol is not reversible as information may be lost along the way:
 
@@ -243,6 +243,6 @@ iex> inspect &(&1+2)
 "#Function<6.71889879/1 in :erl_eval.expr/5>"
 ```
 
-Elixirには他のプロトコルもありますが，最も共通しているものについてはカバーしました．次の章ではElixirにおいての例外とエラーハンドリングについて学びましょう．
+Elixir에는 다른 프로토콜도 있지만 가장 일반적인것들에 대해 살펴보았습니다. 다음 장에서는 에러 핸들링과 예외에 대해 배울것입니다.
 
 There are other protocols in Elixir but this covers the most common ones. In the next chapter we will learn a bit more about error handling and exceptions in Elixir.
