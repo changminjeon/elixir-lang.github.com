@@ -13,9 +13,9 @@ Elixir는 3가지(errors, throws and exits)에러 메커니즘을 가지고 있�
 
 Elixir has three error mechanisms: errors, throws and exits. In this chapter we will explore each of them and include remarks about when each should be used.
 
-## 17.1 エラー - Errors
+## 17.1 에러 - Errors
 
-アトムへ数を足そうとすると，エラーの例を見ることができます．
+원자형에 숫자를 더하려고 하면 샘플오류가 발생합니다:
 
 A sample error can be retrieved by trying to add a number into an atom:
 
@@ -25,7 +25,7 @@ iex> :foo + 1
      :erlang.+(:foo, 1)
 ```
 
-ランタイムエラーは`raise/1`マクロを使うことでいつでも起こすことができます:
+`raise/1`매크로를 사용하여 언제든지 런타임 오류를 발생시킬 수 있습니다:
 
 A runtime error can be raised any time by using the `raise/1` macro:
 
@@ -34,7 +34,7 @@ iex> raise "oops"
 ** (RuntimeError) oops
 ```
 
-他のエラーは`raise/2`にエラーの名前とキーワード引数のリストを渡すことで起こすことができます:
+`raise/2`에 에러이름과 키워드 인자리스트를 넘겨서 다른에러들을 발생시킬 수 있습니다:
 
 Other errors can be raised with `raise/2` passing the error name and a list of keyword arguments:
 
@@ -43,7 +43,7 @@ iex> raise ArgumentError, message: "invalid argument foo"
 ** (ArgumentError) invalid argument foo
 ```
 
-モジュールを作り，その中で`defexception/1`マクロを使うと自分でエラーを定義することもできます．よくあるケースでは例外を定義するときにメッセージも入力できるようにします:
+자체오류들을 정의하는 모듈을 생성할수도 있고 `defexception/1`매크로를 집어 넣을수 있습니다. 가장 일반적인 케이스는 메시지 필드와 함께 예외를 정의하는것입니다:
 
 You can also define your own errors by creating a module and use the `defexception/1` macro inside it. The most common case is to define an exception with a message field:
 
@@ -57,7 +57,7 @@ iex> raise MyError, message: "custom message"
 ** (MyError) custom message
 ```
 
-例外は`try/rescue`構造で拾うことができます:
+`try/rescue`구조를 사용하여 예외를 처리할수있습니다:
 
 Exceptions can be rescued by using the `try/rescue` construct:
 
@@ -70,7 +70,7 @@ iex> try do
 %RuntimeError{message: "oops"}
 ```
 
-上の例ではランタイムエラーを拾い，`iex`セッションでエラーが表示されるようにエラー自身を返しています．しかし実際のところElixirを使っている開発者が`try/rescue`構造を使うことはほとんどないでしょう．例えば，多くの言語ではファイルを開けなかったときにエラーになるので，あなたがそれを拾わなければならないようになっています．一方Elixirでの関数`File.read/1`は，ファイルを開くのに成功した/失敗した情報を含んだタプルを返すようになっています:
+위의 예제는 런타임에러를 처리하고 `iex`세션에서 에러자체를 출력하기 위해 리턴합니다. 그러나 실제로 Elixir를 사용하는 개발자는 `try/rescue`구조를 사용하는일은 거의 없습니다. 예를들어, 많은 언어에서 파일을 열 수 없을때 에러를 처리하도록 강제하고 있습니다. 한편 Elixir에서는 파일이 성공적으로 오픈됐는지 아닌지를 가지고 있는 튜플을 리턴하는 `File.read/1`함수를 제공합니다:
 
 The example above rescues the runtime error and returns the error itself which is then printed in the `iex` session. In practice Elixir developers rarely use the `try/rescue` construct though. For example, many languages would force you to rescue an error when a file cannot open successfully. Elixir instead provides a `File.read/1` function which returns a tuple containing information if the file was opened with success or not:
 
@@ -83,7 +83,7 @@ iex> File.read "hello"
 {:ok, "world"}
 ````
 
-ここには`try/rescue`が出てきません．ファイルを開くときにおこる複数の結果に対応したいときは，`case`を使ってパターンマッチングするだけです:
+여기에서는 `try/rescue`가 없습니다. 파일을 열때 발생하는 여러결과에 대해 처리하고 싶을때는 `case`를 사용하여 패턴매칭을 하면됩니다:
 
 There is no `try/rescue` here. In case you want to handle multiple outcomes of opening a file, you can simply use pattern matching with `case`:
 
@@ -94,11 +94,11 @@ iex> case File.read "hello" do
 ...> end
 ```
 
-最終的に，ファイルを開いたときに例外にするかどうかはあなたのアプリケーションでどうするか決めることになります．なぜならElixirでは`File.read/1`や他の多くの関数が例外を押しつけてこないからです．どうすれば一番よくなるかは開発者へお任せしています．
+마지막으로, 파일을 열 때 발생하는 에러의 예외 여부는 어플리케이션에서 어떻게 할지 결정하면 됩니다. 왜냐하면 Elixir는 `File.read/1`과 다른 많은 함수가 예외를 강요하지 않기 때문입니다. 대신에 어떻게하면 가장 좋을지는 개발자에게 맡겨둡니다.
 
 At the end of the day, it is up to your application to decide if an error while opening a file is exceptional or not. That's why Elixir doesn't impose exceptions on `File.read/1` and many other functions. Instead we leave it up to the developer to choose the best way to proceed.
 
-ファイルがあることを期待している(そしてファイルがないと本当の意味でのエラー)の場合は単に`File.read!/1`を使えます:
+파일의 존재유무만 판단하려면 단순히 `File.read!/1`을 사용할 수 있습니다:
 
 For the cases where you do expect a file to exist (and the lack of a file is truly an error) you can simply use `File.read!/1`:
 
@@ -108,17 +108,17 @@ iex> File.read! "unknown"
     (elixir) lib/file.ex:305: File.read!/1
 ```
 
-言い変えると，`try/rescue`の利用を避けるのは*フロー制御のためにエラーを利用しない*ためです．Elixirでは，エラーを期待していない，あるいは例外的な状況のために用意しています．フロー制御構造が必要な場合，スローが使われなければなりません．次にそれを見ていきましょう．
+한마디로 얘기해서 **control flow위해 에러를 사용하지 않기때문에** `try/rescue`를 사용하지 않을것입니다. Elixir는 오류를 문자 그대로 가져갑니다. 하지만 예외적인 상황을 위해서도 준비되어 있습니다. 흐름 제어 구조가 필요한경우, throw를 사용해야 합니다. 다음에서 살펴봅시다.
 
 In other words, we avoid using `try/rescue` because **we don't use errors for control flow**. In Elixir, we take errors literally: they are reserved to unexpected and/or exceptional situations. In case you actually need flow control constructs, throws must be used. That's what we are going to see next.
 
-## 17.2 スロー - Throws
+## 17.2 Throws
 
-Elixirでは後で捕れるように値を投げることができます．`throw`と`catch`がないと値が取れないような状況のために`throw`と`catch`という言葉は予約されています．
+Elixir에서는 나중에 잡을수있게 변수를 던질수도 있습니다. `throw`와 `catch`를 사용하지 않는다면 값을 검색할수 없을경우를 위해 `throw`와 `catch`가 준비되어있습니다.
 
 In Elixir, one can throw a value to be caught later. `throw` and `catch` are reserved for situations where it is not possible to retrieve a value unless by using `throw` and `catch`.
 
-ライブラリでふさわしいAPIが提供されていないないような場合はあまりありません．例えば`Enum`モジュールで，13の倍数となるような最初の数を見つけたいときに適切なAPIが用意されていない場合を考えてみましょう:
+적절한 API를 제공하지 않는 라이브러리와 인터페이스 하지 않는 이상 이러한 상황은 실제로는 매우 드뭅니다. 예를들어 13의 배수가되는 첫번째 숫자를 찾고자 할 때 `Enum`모듈이 적절한 API를 제공하지 않은 경우를 생각해 봅시다:
 
 Those situations are quite uncommon in practice unless when interfacing with a library that does not provide the proper APIs. For example, let's imagine the `Enum` module did not provide any API for finding a value and we need to find the first number that is a multiple of 13:
 
@@ -134,7 +134,7 @@ iex> try do
 "Got -39"
 ```
 
-しかしながら実際には`Enum.find/2`を使った方がシンプルです:
+그러나 실제로는 `Enum.find/2`를 사용하는것이 간단합니다:
 
 However, in practice one can simply use `Enum.find/2`:
 
@@ -143,9 +143,9 @@ iex> Enum.find -50..50, &(rem(&1, 13) == 0)
 -39
 ```
 
-## 17.3 イグジット - Exits
+## 17.3 Exits
 
-全てのElixirコードは複数のプロセスの中で動いていて，お互いにやりとりしています．プロセスが死んだとき，`exit`という信号を送ります．プロセスは明示的にイグジット信号を送ることで死ぬことができます:
+모든 Elixir 코드는 여러 프로세스에서 동작하고 서로 통신하고 있습니다. 프로세스가 죽었을때는 `exit` 신호를 보냅니다. 프로세스는 명시 적으로 exit 신호를 보냄으로써 죽을 수도 있습니다:
 
 Every Elixir code runs inside processes that communicates with each other. When a process dies, it sends an `exit` signal. A process can also die by explicitly sending an exit signal:
 
