@@ -8,11 +8,11 @@ guide: 18
 
   <div class="toc"></div>
 
-Elixirでは，列挙を繰り返すこと，結果をフィルタリングすること，そして別の値のリストへとマッピングすることをよく行います．内包表記はそうした構造の構文糖衣となっており，`for`というスペシャルフォームでそれらの一般的なタスクをまとめています．
+Elixir에서는 열거형에서 값을 하나씩 빼고 종종 결과를 필터링하며 다른 변수리스트에 매핑하는것이 일반적입니다. Comprehensions은 이와같은 것들을 구성하고 공통적인 태스크들을 `for`스페셜 폼안에 그룹핑 하기위한 문법 sugar입니다.
 
 In Elixir, it is common to loop over Enumerables, often filtering some results, and mapping to another list of values. Comprehensions are syntax sugar for such constructs, grouping those common tasks into the `for` special form.
 
-例えば，以下のようにリストの要素の2乗を求めることができます:
+예를들어 리스트안의 각 값들의 배수값을 아래와 같이 구할수 있습니다:
 
 For example, we can get all the square values of elements in a list as follows:
 
@@ -21,13 +21,13 @@ iex> for n <- [1, 2, 3, 4], do: n * n
 [1, 4, 9, 16]
 ```
 
-リスト内包表記は3つの部品，生成器，フィルタ，収集品からできています．
+comprehension은 3가지(generators, filters and collectables)부분으로 이루어져있습니다.
 
 A comprehension is made of three parts: generators, filters and collectables.
 
-## 18.1 生成器とフィルタ - Generators and filters
+## 18.1 Generators and filters
 
-上の式での`n <- [1, 2, 3, 4]`が生成器です．これは文字通りリスト内包表記で使われる値を生成します．列挙可能なものなら何でも生成器の右側の式へ渡せます:
+위의 식에서 `n <- [1, 2, 3, 4]`는 제너레이터입니다. 문자그대로 comprehensions안에 있는 값들을 하나씩 제너레이팅합니다. 어떠한 열거형이라도 제너레이터 식의 오른쪽에 사용할수있습니다: 
 
 In the expression above, `n <- [1, 2, 3, 4]` is the generator. It is literally generating values to be used in the comprehensions. Any enumerable can be passed in the right-hand side the generator expression:
 
@@ -36,7 +36,7 @@ iex> for n <- 1..4, do: n * n
 [1, 4, 9, 16]
 ```
 
-生成器はパターンマッチングにも対応しており，マッチしなかった全てのパターンを無視します．範囲のかわりに，キーがアトムで`:good`か`:bad`となっているキーワードリストを持っていて，goodとなっているものの値だけを二乗したい場合を考えてみましょう:
+제너레이터 식들은 패턴매칭도 지원합니다. 레인지 대신에 키가 `:good`또는 `:bad` 원자형이고 good값의 배수값만 계산하길 원한다고 하면:
 
 Generator expressions also support pattern matching, ignoring all non-matching patterns. Imagine that instead of a range, we have a keyword list where the key is the atom `:good` or `:bad` and we only want to calculate the square of the good values:
 
@@ -46,7 +46,7 @@ iex> for {:good, n} <- values, do: n * n
 [1, 4, 16]
 ```
 
-代わりに，幾つか目的にあった要素だけを通すのにフィルターを利用することもできます．例えば奇数の二乗だけを入手できます:
+특정 엘리먼트를 필터링 하기 위해 필터를 사용할수도 있습니다. 예를들어 오로지 홀수의 배수만 가져온다고 하면:
 
 Alternatively, filters can be used to filter some particular elements out. For example, we can get the square of only odd numbers:
 
@@ -56,11 +56,11 @@ iex> for n <- 1..4, Integer.is_odd(n), do: n * n
 [1, 9]
 ```
 
-フィルターは`nil`か`false`以外の全ての値を通します．
+필터는 `nil` 또는 `false`를 제외한 모든값들을 넣습니다.
 
 A filter will keep all values except `nil` or `false`.
 
-一般的に内包表記は`Enum`や`Stream`モジュールにある同じ効果を持つ関数を使うより簡潔な表現を提供します．そのうえ，内包表記には複数の生成器とフィルターを与えることができます．ディレクトリのリストを受けとって，それらのディレクトリにある全てのファイルを削除する例がこちらです:
+일반적으로 comprehension은 `Enum`과 `Stream`모듈에서 동일한 효과를 가지는 함수를 사용하는 것보다 간결한 표현을 제공합니다. 게다가 comprehensions는 여러 제너레이터 및 필터를 사용할 수 있습니다. 디렉토리 목록을 받아 그 디렉토리에있는 모든 파일을 삭제하는 예제가 여기 있습니다:
 
 Comprehensions in general provide a much more concise representation than using the equivalent functions from the `Enum` and `Stream` modules. Furthermore, comprehensions also allow multiple generators and filters to be given. Here is an example that receives a list of directories and deletes all files in those directories:
 
@@ -73,13 +73,13 @@ for dir  <- dirs,
 end
 ```
 
-リスト内包表記の中の変数割り当てについて覚えておいてください．生成器，フィルター，あるいはブロックの内にあるものはリスト内包表記の外側には影響を及ぼしません．
+comprehension안에서 할당된 변수는 제너레이터, 필터 또는 블록에서만 유효하며 바깥에서는 사용할수 없습니다.
 
 Keep in mind that variable assignments inside the comprehension, be it in generators, filters or inside the block, are not reflected outside of the comprehension.
 
-## 18.2 Bitstring生成器 - Bitstring generators
+## 18.2 Bitstring generators
 
-Bitstring生成器も使えます．bitstringのstreamを用意したいときにとても便利です．以下はそれぞれ赤，緑，青の値を表すピクセルのリストをバイナリで受け取ってタプルへと変換する例です:
+비트스트링 발생기는 비트스트링 스트림을 구성하고자 할때 매유 유용합니다. 아래예제는 각각 빨강,녹색과 파란색 바이너리값의 픽셀 리스트를 받아서 3개씩 그룹핑하는것을 보여줍니다:
 
 Bitstring generators are also supported and are very useful when you need to organize bitstring streams. The example below receives a list of pixels from a binary with their respective red, green and blue values and convert them into triplets:
 
@@ -89,17 +89,17 @@ iex> for <<r::8, g::8, b::8 <- pixels>>, do: {r, g, b}
 [{213,45,132},{64,76,32},{76,0,0},{234,32,15}]
 ```
 
-Bitstring生成器は"普通の"enumerable生成器と混ぜられ，フィルタもうまく動きます．
+Bitstring 제너레이터는 일반적인 열거형 제너레이터 뿐만아니라 필터도 사용할수 있습니다.
 
 A bitstring generator can be mixed with the "regular" enumerable generators and provide filters as well.
 
-## 18.3 Into - Into
+## 18.3 Into
 
-上の例のように，内包表記は結果としてリストを返します．
+위의 예제는 comprehension이 결과로써 리스트를 반환합니다.
 
 In the examples above, the comprehension returned a list as a result.
 
-しかし，`:into`オプションを渡すことで，内包表記の結果を異なるデータ型へと挿入することができます．例えば，全ての空白を簡単に削除するのにbitstring生成器と`:into`オプションを使うことができます:
+그러나 comprehension의 결과는 `:into`옵션을 사용하여 다른 데이터 구조로도 삽입될수있습니다. 예를들어 비트스트링 제너레이터를 `:into`옵션과 함께 사용하면 스트링의 모든 공백을 쉽게 제거할 수 있습니다:
 
 However, the result of a comprehension can be inserted into different data structures by passing the `:into` option. For example, we can use bitstring generators with the `:into` option to easily remove all spaces in a string:
 
@@ -108,11 +108,11 @@ iex> for <<c <- " hello world ">>, c != ?\s, into: "", do: <<c>>
 "helloworld"
 ```
 
-セット，マップそして他のディクショナリも`:into`オプションに渡せます．たいていの場合，`:into`は`Collectable`プロトコルを実装してさえいればどんなものでも受けつけます．
+Sets, maps과 다른 딕셔너리에도 `:into`옵션을 사용할수 있습니다. 일반적으로 `:into`는 `Collectable`프로토콜만 구현하는 어떠한 구조체라도 받아 들입니다.
 
 Sets, maps and other dictionaries can also be given with the `:into` option. In general, the `:into` accepts any structure as long as it implements the `Collectable` protocol.
 
-例えば`IO`モジュールはストリームを提供します．ストリームは`Enumerable`でかつ`Collectable`です．内包表記を使って何でもタイプしたものを大文字にして返すエコー端末を実装することができます:
+예를들어 `IO`모듈은 `Enumerable`과 `Collectable`스트림을 제공합니다. comprehension을 사용하여 어떠한 문자도 대문자로 바꿔주는 echo terminal을 구현할수 있습니다.
 
 For example, the `IO` module provides streams, that are both `Enumerable` and `Collectable`. You can implement an echo terminal that returns whatever is typed, but in upcase, using comprehensions:
 
@@ -123,6 +123,6 @@ iex> for line <- stream, into: stream do
 ...> end
 ```
 
-ターミナルに何か文字を打つと同じ値が大文字になって表示されるのを見られるでしょう．不幸なことにこの例はシェルを内包表記にとじこめてしまいます，そこから出るには`Ctrl+C`を二回押さなければなりません．:)
+이제 터미널에 어떤 스트링이라도 타이핑하면 대문자로 출력됩니다. 불행하게도 이 예제는 comprehension에 걸려있어 빠져나오려면 `Ctrl+C`를 두번 눌러야 합니다.
 
 Now type any string into the terminal and you will see the same value will be printed in upcase. Unfortunately, this example also got your shell stuck in the comprehension, so you will need to hit `Ctrl+C` twice to get out of it. :)
