@@ -22,7 +22,7 @@ In the chapter, we are going to explore sigils, which are one of the mechanisms 
 
 ## 19.1 정규표현 - Regular expressions
 
-시길은 물결표시(`~`)로 시작하고 특정문자가 따라오고 나면 구분자가 옵니다. 정규표현식[regular expressions](https://en.wikipedia.org/wiki/Regular_Expressions)을 위한 가장 일반적인 sigil은 `~r`입니다:
+시길(sigil)은 물결표시(`~`)로 시작하고 특정문자가 따라오고 나면 구분자가 옵니다. 정규표현식[regular expressions](https://en.wikipedia.org/wiki/Regular_Expressions)을 위한 가장 일반적인 sigil은 `~r`입니다:
 
 Sigils start with the tilde (`~`) character which is followed by a letter and then a separator. The most common sigil in Elixir is `~r` for [regular expressions](https://en.wikipedia.org/wiki/Regular_Expressions):
 
@@ -51,7 +51,7 @@ true
 
 Check out the [`Regex` module](/docs/stable/elixir/Regex.html) for more information on other modifiers and the supported operations with regular expressions.
 
-아직까지는 정규표현식의 모든 예제에서 `/`를 구분자로 사용했습니다. 하지만 시길은 8가지 다른 구분자도 지원하고 있습니다:
+아직까지는 정규표현식의 모든 예제에서 `/`를 구분자로 사용했습니다. 하지만 시길(sigil)은 8가지 다른 구분자도 지원하고 있습니다:
 
 So far, all examples have used `/` to delimit a regular expression. However sigils support 8 different separators:
 
@@ -66,17 +66,17 @@ So far, all examples have used `/` to delimit a regular expression. However sigi
 ~r<hello>
 ```
 
-다른 오퍼레이터를 지원하는 이유는 다른 시길에서는 다른 구분자들이 편리할수도 있기 때문입니다. 예를들어, 정규식안에 괄호를 섞어서 사용할때 이 괄호는 구분자와 헷갈릴수 있습니다. 그러나 다음 장에서 보시는 바와 같이 괄호는 다른 시길들을 위해 편리합니다.
+다른 오퍼레이터를 지원하는 이유는 다른 시길(sigil)에서는 다른 구분자들이 편리할수도 있기 때문입니다. 예를들어, 정규식안에 괄호를 섞어서 사용할때 이 괄호는 구분자와 헷갈릴수 있습니다. 그러나 다음 장에서 보시는 바와 같이 괄호는 다른 시길(sigil)들을 위해 편리합니다.
 
 The reasoning in supporting different operators is that different separators can be more convenient to different sigils. For example, using parentheses for regular expressions may be a confusing choice as they can get mixed with the parentheses inside the regex. However, parentheses can be handy for other sigils, as we will see in the next section.
 
-## 19.2 문자열, 문자 리스트와 워드 시길 - Strings, char lists and words sigils
+## 19.2 문자열, 문자 리스트와 워드 시길(sigil) - Strings, char lists and words sigils
 
-정규식 이외에 Elixir는 3개의 시길을 제공합니다.
+정규식 이외에 Elixir는 3개의 시길(sigil)을 제공합니다.
 
 Besides regular expressions, Elixir ships with three other sigils.
 
-`~s`시길은 큰따옴와 유사한 문자열을 생성하는게 사용합니다: 
+`~s`시길(sigil)은 큰따옴와 유사한 문자열을 생성하는게 사용합니다: 
 
 The `~s` sigil is used to generate strings, similar to double quotes:
 
@@ -94,7 +94,7 @@ iex> ~c(this is a string with "quotes")
 'this is a string with "quotes"'
 ```
 
-`~w`시길은 공백문자로 분리된 문자 리스트를 생성하는데 사용합니다:
+`~w`시길(sigil)은 공백문자로 분리된 문자 리스트를 생성하는데 사용합니다:
 
 The `~w` sigil is used to generate a list of words separated by white space:
 
@@ -112,7 +112,7 @@ iex> ~w(foo bar bat)a
 [:foo, :bar, :bat]
 ```
 
-소문자 시길이외에 Elixir는 대문자시길도 지원합니다. `~s`와 `~S`는 모두 문자열을 반환하지만 `~s`는 이스케이프 코드와 치환을 허용하지만 `S`는 그렇지 않습니다:
+소문자 시길(sigil)이외에 Elixir는 대문자시길(sigil)도 지원합니다. `~s`와 `~S`는 모두 문자열을 반환하지만 `~s`는 이스케이프 코드와 치환을 허용하지만 `S`는 그렇지 않습니다:
 
 Besides lowercase sigils, Elixir supports uppercase sigils. While both `~s` and `~S` will return strings, the first one allows escape codes and interpolation while the second does not:
 
@@ -144,7 +144,7 @@ The following escape codes can be used in strings and char lists:
 * `\xDD` - character with hexadecimal representation DD (example: `\x13`)
 * `\x{D...}` - character with hexadecimal representation with one or more hexadecimal digits (example: `\x{abc13}`)
 
-시길은 구분자로써 3개의 따옴표 또는 따옴표를 사용할때 heredocs를 지원합니다:
+시길(sigil)은 구분자로써 3개의 따옴표 또는 따옴표를 사용할때 heredocs를 지원합니다:
 
 Sigils also support heredocs, which is when triple double- or single-quotes are used as separators:
 
@@ -189,9 +189,9 @@ Converts double-quotes to single-quotes.
 def convert(...)
 ```
 
-## 19.3 커스텀 시길 - Custom sigils
+## 19.3 커스텀 시길(sigil) - Custom sigils
 
-이 장의 처음에 제시한것처럼 Elixir에서 시길은 확장 가능합니다. 실제로 시길 `~r/foo/i`과 `sigil_r`함수를 2개의 인자와 함께 호출하는 것은 같습니다:
+이 장의 처음에 제시한것처럼 Elixir에서 시길(sigil)은 확장 가능합니다. 실제로 시길(sigil) `~r/foo/i`은 `sigil_r`함수를 2개의 인자와 함께 호출하는 것은 같습니다:
 
 As hinted at the beginning of this chapter, sigils in Elixir are extensible. In fact, the sigil `~r/foo/i` is equivalent to calling the `sigil_r` function with two arguments:
 
@@ -200,7 +200,7 @@ iex> sigil_r(<<"foo">>, 'i')
 ~r"foo"i
 ```
 
-즉, `~r`시길에 관한 문서는 `sigil_r`함수를 통해 접근 할 수 있습니다:
+즉, `~r`시길(sigil)에 관한 문서는 `sigil_r`함수를 통해 접근 할 수 있습니다:
 
 That said, we can access the documentation for the `~r` sigil via the `sigil_r` function:
 
@@ -209,7 +209,7 @@ iex> h sigil_r
 ...
 ```
 
-적절한 함수를 구현하면 자체 시길을 사용할 수 있습니다. 예를들어 정수를 반환하는 `~i(13)`시길을 구현해봅시다:
+적절한 함수를 구현하면 자체 시길(sigil)을 사용할 수 있습니다. 예를들어 정수를 반환하는 `~i(13)`시길(sigil)을 구현해봅시다:
 
 We can also provide our own sigils by simply implementing the proper function. For example, let's implement the `~i(13)` sigil that returns an integer:
 
@@ -222,6 +222,6 @@ iex> ~i(13)
 13
 ```
 
-또한 시길은 매크로의 도움으로 컴파일 작업을 수행하는 데 사용할 수 있습니다. 예를들어 Elixir 정규 표현식은 소스 코드를 컴파일할때  효율적인 형태로 컴파일됩니다, 그러면 런타임시에 이 단계를 생략 할 수 있습니다. 만약이 이런 주제에 관심이 있다면 매크로에 대해 좀 더 배우고 `Kernel`모듈에 시길이 어떻게 구현되어 있는지 알아보시기 바랍니다.
+또한 시길(sigil)은 매크로의 도움으로 컴파일 작업을 수행하는 데 사용할 수 있습니다. 예를들어 Elixir 정규 표현식은 소스 코드를 컴파일할때  효율적인 형태로 컴파일됩니다, 그러면 런타임시에 이 단계를 생략 할 수 있습니다. 만약이 이런 주제에 관심이 있다면 매크로에 대해 좀 더 배우고 `Kernel`모듈에 시길(sigil)이 어떻게 구현되어 있는지 알아보시기 바랍니다.
 
 Sigils can also be used to do compile-time work with the help of macros. For example, regular expressions in Elixir are compiled into efficient representation during compilation of the source code, therefore skipping this step at runtime. If you have interest in the subject, we recommend you to learn more about macros and check how those sigils are implemented in the `Kernel` module.
