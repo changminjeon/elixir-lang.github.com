@@ -18,7 +18,7 @@ for(i = 0; i < array.length; i++) {
 }
 ```
 
-위의 예제는 배열과 보조 변수 `i` 를 변화시키고 있습니다. Elixir에서는 저렇게 할 수 없습니다. 대신 함수형 언어는 재귀에 의존합니다: 함수는 재귀적으로 호출되어 정지 조건이 될 때까지 계속 작동합니다. 임의의 횟수만큼 문자를 출력하는 다음예를 살펴 봅시다:
+위의 예제는 배열과 보조 변수 `i`를 변화시키고 있습니다. Elixir에서는 저렇게 할 수 없습니다. 대신 함수형 언어는 재귀에 의존합니다: 함수는 재귀적으로 호출되어 정지 조건이 될 때까지 계속 작동합니다. 임의의 횟수만큼 문자를 출력하는 다음예를 살펴 봅시다:
 
 In the example above, we are mutating the array and the helper variable `i`. That's not possible in Elixir. Instead, functional languages rely on recursion: a function is called recursively until a condition is reached that stops the recursive action from continuing. Consider the example below that prints a string an arbitrary amount of times:
 
