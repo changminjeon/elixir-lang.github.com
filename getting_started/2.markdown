@@ -38,7 +38,7 @@ iex> 10 / 2
 5.0
 ```
 
-`10 / 2` 가 정수 `5` 가 아닌 부동 소수점 `5.0` 을 리턴하는 것에 주의하십시요. 이것은 의도된것입니다. Elixir에서는 `/` 연산자는 항상 부동 소수점을 반환합니다. 만약 정수의 몫과 나머지가 필요한 경우 함수 `div` 과 `rem` 를 호출하면 됩니다:
+`10 / 2`가 정수 `5`가 아닌 부동 소수점 `5.0`을 리턴하는 것에 주의하십시요. 이것은 의도된것입니다. Elixir에서 `/`연산자는 항상 부동 소수점을 반환합니다. 만약 정수의 몫과 나머지가 필요한 경우 함수 `div`과 `rem`를 호출하면 됩니다:
 
 Notice that `10 / 2` returned a float `5.0` instead of an integer `5`. This is expected. In Elixir, the operator `/` always returns a float. If you want to do integer division or get the division remainder, you can invoke the `div` and `rem` functions:
 
@@ -68,7 +68,7 @@ iex> 0x1F
 31
 ```
 
-부동 소수점은 적어도 하나 이상의 숫자 뒤에 점이 필요하며 지수로 `e` 를 사용할 수 있습니다:
+부동 소수점은 적어도 하나 이상의 숫자 뒤에 점이 필요하며 지수로 `e`를 사용할 수 있습니다:
 
 Float numbers require a dot followed by at least one digit and also support `e` for the exponent number:
 
@@ -83,7 +83,7 @@ Elixir 에서 부동소수점은 64비트 표시형입니다.
 
 Floats in Elixir are 64 bit double precision.
 
-주어진 부동 소수점에 가까운 정수 값을 가져 오는 함수 `round` 를 또한 부동 소수점의 정수 부분을 얻을 수있는 함수 `trunc` 를 호출 할 수 있습니다.
+주어진 부동 소수점에 가까운 정수 값을 가져 오는 함수 `round`를 또한 부동 소수점의 정수 부분을 얻을 수있는 함수 `trunc` 를 호출 할 수 있습니다.
 
 You can invoke the `round` function to get the closest integer to a given float, or the `trunc` function to get the integer part of a float.
 
@@ -96,7 +96,7 @@ iex> trunc 3.58
 
 ## 2.2 불리언 - Booleans
 
-Elixir는 불리언으로 `true` 와 `false` 을 사용할 수 있습니다 :
+Elixir는 불리언으로 `true`와 `false`를 사용할 수 있습니다 :
 
 Elixir supports `true` and `false` as booleans:
 
@@ -143,7 +143,7 @@ iex> :hello == :world
 false
 ```
 
-사실, 불리언 `true` 와 `false` 는 원자형입니다:
+사실, 불리언 `true`와 `false`는 원자형입니다:
 
 The booleans `true` and `false` are, in fact, atoms:
 
