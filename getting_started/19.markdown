@@ -8,7 +8,7 @@ guide: 19
 
   <div class="toc"></div>
 
-우리는 이미 Elixir가 제공하는 큰따옴표로 둘러싸인 문자열과 작은따옴표로 묶인 문자리스트에 대해 배웠습니다. 그러나 이것은 언어의 문자 표현의 구조만 표면만 살펴보았을뿐입니다. 예를들어 원자형은 `:atom`표현으로 생성됩니다.
+우리는 이미 큰따옴표로 둘러싸인 문자열과 작은따옴표로 둘러싸인 문자리스트에 대해 배웠습니다. 그러나 이것은 언어의 문자 표현 구조의 표면만 살펴보았을 뿐입니다. 예를들어 원자형은 `:atom`표현으로 생성됩니다.
 
 We have already learned Elixir provides double-quoted strings and single-quoted char lists. However, this only covers the surface of structures that have textual representation in the language. Atoms are, for example, another structure which are mostly created via the `:atom` representation.
 
