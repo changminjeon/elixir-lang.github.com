@@ -48,7 +48,7 @@ Elixir를 설치하면 `iex`, `elixir` 그리고 `elixirc` 세 가지를 실행�
 
 When you install Elixir, you will have three new executables: `iex`, `elixir` and `elixirc`. If you compiled Elixir from source or are using a packaged version, you can find these inside the `bin` directory.
 
-그럼 `iex` (windows를 사용한다면 `iex.bat` 입니다)를 동작시켜 봅시다. iex는 Intractive Elixir 의미합니다. 대화형 모드에서는 어떤 Elixir 표현식이든 입력가능하며 결과를 얻을 수 있습니다. 기본적인 표현식 몇개로 몸좀 풀어볼까요:
+그럼 `iex` (windows를 사용한다면 `iex.bat` 입니다)를 동작시켜 봅시다. iex는 Intractive Elixir를 의미합니다. 대화형 모드에서는 어떤 Elixir 표현식이든 입력가능하며 결과를 얻을 수 있습니다. 기본적인 표현식 몇개로 몸좀 풀어볼까요:
 
 For now, let's start by running `iex` (or `iex.bat` if you are on Windows) which stands for Interactive Elixir. In interactive mode, we can type any Elixir expression and get its result. Let's warm up with some basic expressions:
 
@@ -61,13 +61,13 @@ iex> "hello" <> " world"
 "hello world"
 ```
 
-자 이제 준비가 된거 같네요! 다음 장에서는 언어 구조와 기본적인 형태에 더 익숙해 질 수 있도록 대화 형 쉘을 많이 사용할 것입니다.
+자 이제 준비가 된거 같습니다! 다음 장에서는 언어 구조와 기본적인 형태에 더 익숙해 질 수 있도록 대화형 쉘을 더 많이 사용할 것입니다.
 
 It seems we are ready to go! We will use the interactive shell quite a lot in the next chapters to get a bit more familiar with the language constructs and basic types, starting in the next chapter.
 
 ## 1.3 스크립트 파일 실행 - Running scripts
 
-언어의 기본에 익숙해 진 후에는 아마 간단한 프로그램을 쓰고 싶어 질 것입니다. 파일에 Elixir 코드를 쓰고 `elixir` 에서 수행 할 수 있습니다 :
+언어의 기본에 익숙해 진 후에는 아마 간단한 프로그램을 쓰고 싶어 질 것입니다. 파일에 Elixir 코드를 쓰고 `elixir`로 실행 할 수 있습니다:
 
 After getting familiar with the basics of the language you may want to try writing simple programs. This can be accomplished by putting Elixir code into a file and executing it with `elixir`:
 
